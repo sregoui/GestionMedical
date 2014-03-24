@@ -12,4 +12,5 @@ package contrat;
  */
 public interface IDao {
     
+    
 }
