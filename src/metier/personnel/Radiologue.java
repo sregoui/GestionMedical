@@ -12,6 +12,6 @@ import contrat.Metier;
  *
  * @author Samia
  */
-public class Radiologue extends Metier {
+public class Radiologue extends Medecin {
     
 }

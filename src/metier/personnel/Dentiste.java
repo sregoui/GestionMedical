@@ -12,6 +12,6 @@ import contrat.Metier;
  *
  * @author Samia
  */
-public class Dentiste extends Metier {
+public class Dentiste extends Medecin {
     
 }

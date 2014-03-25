@@ -14,12 +14,26 @@ import java.io.Serializable;
  * @author Samia
  */
 public class Utilisateur extends Metier implements Serializable {
-    
+   
+   /**
+    * Attributs classe utilisateur
+    * id : represente l'id de l'user
+    * login : correspond à l'identifiant de connexion de l'utilisateur
+    * password: mot de passe 
+    * id_role: correspond à l'identifiant du role (medecin, secretaire..) de l'utilisateur
+    */
    private int id;
    private String login;
    private String password;
    private int id_role;
 
+    /**
+     * Constructeur avec id
+     * @param id
+     * @param login
+     * @param password
+     * @param id_role 
+     */
     public Utilisateur(int id, String login, String password, int id_role) {
         this.id = id;
         this.login = login;
@@ -27,11 +41,18 @@ public class Utilisateur extends Metier implements Serializable {
         this.id_role = id_role;
     }
 
+    /**
+     * Constructeur sans l'id
+     * @param login
+     * @param password
+     * @param id_role 
+     */
     public Utilisateur(String login, String password, int id_role) {
         this.login = login;
         this.password = password;
         this.id_role = id_role;
     }
+
 
     public int getId() {
         return id;
