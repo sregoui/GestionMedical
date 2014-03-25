@@ -6,12 +6,16 @@
 
 package metier.personnel;
 
-import contrat.Metier;
+
 
 /**
  *
  * @author Samia
  */
 public class Dentiste extends Medecin {
+
+    public Dentiste(int id, String login, String password, int id_role) {
+        super(id, login, password, id_role);
+    }
     
 }

@@ -12,6 +12,10 @@ import contrat.Metier;
  *
  * @author Samia
  */
-public class Admin extends Metier {
+public class Admin extends Utilisateur {
+
+    public Admin(int id, String login, String password, int id_role) {
+        super(id, login, password, id_role);
+    }
     
 }

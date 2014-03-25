@@ -13,5 +13,9 @@ import contrat.Metier;
  * @author Samia
  */
 public class Chirurgien extends Medecin {
+
+    public Chirurgien(int id, String login, String password, int id_role) {
+        super(id, login, password, id_role);
+    }
     
 }
