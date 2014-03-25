@@ -10,6 +10,6 @@ package contrat;
  *
  * @author Samia
  */
-public interface IMetier {
+public abstract class IMetier {
     
 }
