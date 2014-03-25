@@ -10,8 +10,7 @@ package contrat;
  *
  * @author Samia
  */
-public interface IDao {
- //test  R 
+public interface IDao { 
     
     
 }
