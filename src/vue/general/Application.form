@@ -92,6 +92,26 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="RadiologieMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Radiologie"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="DentisteMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Dentiste"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="GeneralisteMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Generaliste"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="ChirurgienMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Chirurgien"/>
+          </Properties>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>

@@ -60,6 +60,10 @@ public class Application extends javax.swing.JFrame {
         AdminMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
+        RadiologieMenu = new javax.swing.JMenu();
+        DentisteMenu = new javax.swing.JMenu();
+        GeneralisteMenu = new javax.swing.JMenu();
+        ChirurgienMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -184,6 +188,18 @@ public class Application extends javax.swing.JFrame {
 
         menuBar.add(AdminMenu);
 
+        RadiologieMenu.setText("Radiologie");
+        menuBar.add(RadiologieMenu);
+
+        DentisteMenu.setText("Dentiste");
+        menuBar.add(DentisteMenu);
+
+        GeneralisteMenu.setText("Generaliste");
+        menuBar.add(GeneralisteMenu);
+
+        ChirurgienMenu.setText("Chirurgien");
+        menuBar.add(ChirurgienMenu);
+
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -225,25 +241,45 @@ public class Application extends javax.swing.JFrame {
                     case 1:
                         this.MedecinMenu.setVisible(false);
                         this.SecretaireMenu.setVisible(false);
+                        this.RadiologieMenu.setVisible(false);
+                        this.GeneralisteMenu.setVisible(false);
+                        this.ChirurgienMenu.setVisible(false);
+                        this.DentisteMenu.setVisible(false);
                         this.AdminMenu.setVisible(true);
                     break;
                     case 2:
                         this.MedecinMenu.setVisible(false);
                         this.SecretaireMenu.setVisible(true);
+                        this.RadiologieMenu.setVisible(false);
+                        this.GeneralisteMenu.setVisible(false);
+                        this.ChirurgienMenu.setVisible(false);
+                        this.DentisteMenu.setVisible(false);
                         this.AdminMenu.setVisible(false);
                     break;
                     case 3:
                         this.MedecinMenu.setVisible(true);
+                        this.GeneralisteMenu.setVisible(true);
+                        this.RadiologieMenu.setVisible(false);
+                        this.DentisteMenu.setVisible(false);
+                        this.ChirurgienMenu.setVisible(false);
                         this.SecretaireMenu.setVisible(false);
                         this.AdminMenu.setVisible(false);
                     break;
                     case 4:
                         this.MedecinMenu.setVisible(true);
+                        this.DentisteMenu.setVisible(true);
+                        this.RadiologieMenu.setVisible(false);
+                        this.GeneralisteMenu.setVisible(false);
+                        this.ChirurgienMenu.setVisible(false);
                         this.SecretaireMenu.setVisible(false);
                         this.AdminMenu.setVisible(false);
                     break;
                     case 5:
                         this.MedecinMenu.setVisible(true);
+                        this.RadiologieMenu.setVisible(true);
+                        this.GeneralisteMenu.setVisible(false);
+                        this.ChirurgienMenu.setVisible(false);
+                        this.DentisteMenu.setVisible(false);
                         this.SecretaireMenu.setVisible(false);
                         this.AdminMenu.setVisible(false);
                     break;
@@ -293,7 +329,11 @@ public class Application extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu AdminMenu;
+    private javax.swing.JMenu ChirurgienMenu;
+    private javax.swing.JMenu DentisteMenu;
+    private javax.swing.JMenu GeneralisteMenu;
     private javax.swing.JMenu MedecinMenu;
+    private javax.swing.JMenu RadiologieMenu;
     private javax.swing.JMenu SecretaireMenu;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
