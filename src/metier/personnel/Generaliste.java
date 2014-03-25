@@ -6,10 +6,12 @@
 
 package metier.personnel;
 
+import contrat.Metier;
+
 /**
  *
  * @author Samia
  */
-public class Generaliste {
+public class Generaliste extends Metier {
     
 }

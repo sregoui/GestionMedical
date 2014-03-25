@@ -6,10 +6,12 @@
 
 package metier.facturation;
 
+import contrat.Metier;
+
 /**
  *
  * @author Samia
  */
-public class Repartition {
+public class Repartition extends Metier {
     
 }

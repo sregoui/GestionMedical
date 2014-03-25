@@ -6,10 +6,12 @@
 
 package metier.patient;
 
+import contrat.Metier;
+
 /**
  *
  * @author Samia
  */
-public class Medicament {
+public class Medicament extends Metier {
     
 }

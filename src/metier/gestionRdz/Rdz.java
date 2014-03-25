@@ -6,10 +6,12 @@
 
 package metier.gestionRdz;
 
+import contrat.Metier;
+
 /**
  *
  * @author Samia
  */
-public class Rdz {
+public class Rdz extends Metier {
     
 }

@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Samia
  */
-public interface IDao<T extends IMetier> {
+public interface IDao<T extends Metier> {
     
     public bdd bdd = new bdd(); 
     public void insert(T objet);
