@@ -14,8 +14,10 @@ import contrat.Metier;
  */
 public class Medecin extends Utilisateur {
 
-    public Medecin(int id, String login, String password, int id_role) {
-        super(id, login, password, id_role);
+    public Medecin(int id, String login, String password, int id_role, String nom, String prenom, String email, String telPort, String telFixe) {
+        super(id, login, password, id_role, nom, prenom, email, telPort, telFixe);
     }
+
+
     
 }

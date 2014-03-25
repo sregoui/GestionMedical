@@ -6,17 +6,27 @@
 
 package vue.general;
 
+import contrat.IDao;
+import factory.FactoryDao;
+import java.util.List;
+import metier.personnel.Utilisateur;
+
 /**
  *
  * @author Samia
  */
 public class Application extends javax.swing.JFrame {
+    private List l;
+    private String userText;
+    private String mdpText;
+    private Utilisateur u;
 
     /**
      * Creates new form Application
      */
     public Application() {
         initComponents();
+        this.menuBar.setVisible(false);
     }
 
     /**
@@ -42,7 +52,7 @@ public class Application extends javax.swing.JFrame {
         saveMenuItem = new javax.swing.JMenuItem();
         saveAsMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
+        MedecinMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
         copyMenuItem = new javax.swing.JMenuItem();
         pasteMenuItem = new javax.swing.JMenuItem();
@@ -114,7 +124,7 @@ public class Application extends javax.swing.JFrame {
         jInternalFrame1.setBounds(250, 40, 240, 200);
 
         fileMenu.setMnemonic('f');
-        fileMenu.setText("File");
+        fileMenu.setText("Secretaire");
 
         openMenuItem.setMnemonic('o');
         openMenuItem.setText("Open");
@@ -140,29 +150,29 @@ public class Application extends javax.swing.JFrame {
 
         menuBar.add(fileMenu);
 
-        editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
+        MedecinMenu.setMnemonic('e');
+        MedecinMenu.setText("Medecin");
 
         cutMenuItem.setMnemonic('t');
         cutMenuItem.setText("Cut");
-        editMenu.add(cutMenuItem);
+        MedecinMenu.add(cutMenuItem);
 
         copyMenuItem.setMnemonic('y');
         copyMenuItem.setText("Copy");
-        editMenu.add(copyMenuItem);
+        MedecinMenu.add(copyMenuItem);
 
         pasteMenuItem.setMnemonic('p');
         pasteMenuItem.setText("Paste");
-        editMenu.add(pasteMenuItem);
+        MedecinMenu.add(pasteMenuItem);
 
         deleteMenuItem.setMnemonic('d');
         deleteMenuItem.setText("Delete");
-        editMenu.add(deleteMenuItem);
+        MedecinMenu.add(deleteMenuItem);
 
-        menuBar.add(editMenu);
+        menuBar.add(MedecinMenu);
 
         helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
+        helpMenu.setText("Admin");
 
         contentMenuItem.setMnemonic('c');
         contentMenuItem.setText("Contents");
@@ -196,35 +206,36 @@ public class Application extends javax.swing.JFrame {
 
     private void jBconnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconnectionActionPerformed
 
-//        IDao dao = FactoryDao.getDAO("User");
-//        l = dao.selectAll();
-//        userText = this.jTUser.getText();
-//        mdpText = this.jTpassword.getText();
-//
-//        for(Object o: l){
-//            u = (User) o;
-//
-//            if(u.getNom().equals(userText) && u.getPassword().equals(mdpText))
-//            {
-//                jLmessage.setText("Authentification réussie");
-//
-//                this.jInternalFrame1.setVisible(false);
-//                this.menuBar.setVisible(true);
-//
-//                if(u.getRole() == 0){
-//
-//                    this.AdminMenu.setVisible(false);
-//
-//                }else{
-//
-//                    this.AdminMenu.setVisible(true);
-//                }
-//                break;
-//            }else
-//            {
-//                jLmessage.setText("Authentification ratée");
-//            }
-//        }
+        IDao dao = FactoryDao.getDAO("Utilisateur");
+        l = dao.selectAll();
+        userText = this.jTUser.getText();
+        mdpText = this.jTpassword.getText();
+
+        for(Object o: l){
+            u = (Utilisateur) o;
+
+            if(u.getLogin().equals(userText) && u.getPassword().equals(mdpText))
+            {
+                jLmessage.setText("Authentification réussie");
+
+                this.jInternalFrame1.setVisible(false);
+                this.menuBar.setVisible(true);
+
+                
+                if(u.getId_role() == 1){
+
+                    this.MedecinMenu.setVisible(false);
+                    
+                }else{
+
+                    this.MedecinMenu.setVisible(true);
+                }
+                break;
+            }else
+            {
+                jLmessage.setText("Authentification ratée");
+            }
+        }
     }//GEN-LAST:event_jBconnectionActionPerformed
 
     /**
@@ -263,13 +274,13 @@ public class Application extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu MedecinMenu;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;

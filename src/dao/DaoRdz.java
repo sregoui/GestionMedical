@@ -10,7 +10,7 @@ import contrat.IDao;
 import java.sql.ResultSet;
 import java.util.List;
 import metier.gestionRdz.*;
-import metier.personnel.Utilisateur;
+
 
 /**
  *

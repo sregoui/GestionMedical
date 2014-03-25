@@ -26,31 +26,58 @@ public class Utilisateur extends Metier implements Serializable {
    private String login;
    private String password;
    private int id_role;
+   private String nom;
+   private String prenom;
+   private String email;
+   private String telPort;
+   private String telFixe;
 
-    /**
-     * Constructeur avec id
-     * @param id
-     * @param login
-     * @param password
-     * @param id_role 
-     */
-    public Utilisateur(int id, String login, String password, int id_role) {
+   /**
+    * 
+    * @param id
+    * @param login
+    * @param password
+    * @param id_role
+    * @param nom
+    * @param prenom
+    * @param email
+    * @param telPort
+    * @param telFixe 
+    */
+    public Utilisateur(int id, String login, String password, int id_role, String nom, String prenom, String email, String telPort, String telFixe) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.id_role = id_role;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.telPort = telPort;
+        this.telFixe = telFixe;
     }
 
-    /**
-     * Constructeur sans l'id
-     * @param login
-     * @param password
-     * @param id_role 
-     */
-    public Utilisateur(String login, String password, int id_role) {
+
+
+  /**
+   * 
+   * @param login
+   * @param password
+   * @param id_role
+   * @param nom
+   * @param prenom
+   * @param email
+   * @param telPort
+   * @param telFixe 
+   */
+    public Utilisateur(String login, String password, int id_role, String nom, String prenom, String email, String telPort, String telFixe) {
         this.login = login;
         this.password = password;
         this.id_role = id_role;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.telPort = telPort;
+        this.telFixe = telFixe;
     }
 
 
@@ -86,10 +113,49 @@ public class Utilisateur extends Metier implements Serializable {
         this.id_role = id_role;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelPort() {
+        return telPort;
+    }
+
+    public void setTelPort(String telPort) {
+        this.telPort = telPort;
+    }
+
+    public String getTelFixe() {
+        return telFixe;
+    }
+
+    public void setTelFixe(String telFixe) {
+        this.telFixe = telFixe;
+    }
+
     @Override
     public String toString() {
-        return "Utilisateur{" + "id=" + id + ", login=" + login + ", password=" + password + ", id_role=" + id_role + '}';
+        return "Utilisateur{" + "id=" + id + ", login=" + login + ", password=" + password + ", id_role=" + id_role + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", telPort=" + telPort + ", telFixe=" + telFixe + '}';
     }
-   
     
 }
