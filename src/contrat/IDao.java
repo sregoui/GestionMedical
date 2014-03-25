@@ -12,7 +12,5 @@ package contrat;
  * @author Samia
  */
 public interface IDao {
-   //test2 
-    
-    //test 3
+
 }
