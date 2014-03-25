@@ -47,7 +47,7 @@ public class Application extends javax.swing.JFrame {
         jBconnection = new javax.swing.JButton();
         jLmessage = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
+        SecretaireMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
         saveMenuItem = new javax.swing.JMenuItem();
         saveAsMenuItem = new javax.swing.JMenuItem();
@@ -57,7 +57,7 @@ public class Application extends javax.swing.JFrame {
         copyMenuItem = new javax.swing.JMenuItem();
         pasteMenuItem = new javax.swing.JMenuItem();
         deleteMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
+        AdminMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
 
@@ -117,27 +117,27 @@ public class Application extends javax.swing.JFrame {
                 .addComponent(jLmessage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBconnection)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         desktopPane.add(jInternalFrame1);
-        jInternalFrame1.setBounds(250, 40, 240, 200);
+        jInternalFrame1.setBounds(250, 40, 240, 220);
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("Secretaire");
+        SecretaireMenu.setMnemonic('f');
+        SecretaireMenu.setText("Secretaire");
 
         openMenuItem.setMnemonic('o');
         openMenuItem.setText("Open");
-        fileMenu.add(openMenuItem);
+        SecretaireMenu.add(openMenuItem);
 
         saveMenuItem.setMnemonic('s');
         saveMenuItem.setText("Save");
-        fileMenu.add(saveMenuItem);
+        SecretaireMenu.add(saveMenuItem);
 
         saveAsMenuItem.setMnemonic('a');
         saveAsMenuItem.setText("Save As ...");
         saveAsMenuItem.setDisplayedMnemonicIndex(5);
-        fileMenu.add(saveAsMenuItem);
+        SecretaireMenu.add(saveAsMenuItem);
 
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Exit");
@@ -146,9 +146,9 @@ public class Application extends javax.swing.JFrame {
                 exitMenuItemActionPerformed(evt);
             }
         });
-        fileMenu.add(exitMenuItem);
+        SecretaireMenu.add(exitMenuItem);
 
-        menuBar.add(fileMenu);
+        menuBar.add(SecretaireMenu);
 
         MedecinMenu.setMnemonic('e');
         MedecinMenu.setText("Medecin");
@@ -171,18 +171,18 @@ public class Application extends javax.swing.JFrame {
 
         menuBar.add(MedecinMenu);
 
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Admin");
+        AdminMenu.setMnemonic('h');
+        AdminMenu.setText("Directeur");
 
         contentMenuItem.setMnemonic('c');
         contentMenuItem.setText("Contents");
-        helpMenu.add(contentMenuItem);
+        AdminMenu.add(contentMenuItem);
 
         aboutMenuItem.setMnemonic('a');
         aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
+        AdminMenu.add(aboutMenuItem);
 
-        menuBar.add(helpMenu);
+        menuBar.add(AdminMenu);
 
         setJMenuBar(menuBar);
 
@@ -220,19 +220,37 @@ public class Application extends javax.swing.JFrame {
 
                 this.jInternalFrame1.setVisible(false);
                 this.menuBar.setVisible(true);
-
                 
-                if(u.getId_role() == 1){
-
-                    this.MedecinMenu.setVisible(false);
-                    
-                }else{
-
-                    this.MedecinMenu.setVisible(true);
-                }
-                break;
-            }else
-            {
+                    switch (u.getId_role()){
+                    case 1:
+                        this.MedecinMenu.setVisible(false);
+                        this.SecretaireMenu.setVisible(false);
+                        this.AdminMenu.setVisible(true);
+                    break;
+                    case 2:
+                        this.MedecinMenu.setVisible(false);
+                        this.SecretaireMenu.setVisible(true);
+                        this.AdminMenu.setVisible(false);
+                    break;
+                    case 3:
+                        this.MedecinMenu.setVisible(true);
+                        this.SecretaireMenu.setVisible(false);
+                        this.AdminMenu.setVisible(false);
+                    break;
+                    case 4:
+                        this.MedecinMenu.setVisible(true);
+                        this.SecretaireMenu.setVisible(false);
+                        this.AdminMenu.setVisible(false);
+                    break;
+                    case 5:
+                        this.MedecinMenu.setVisible(true);
+                        this.SecretaireMenu.setVisible(false);
+                        this.AdminMenu.setVisible(false);
+                    break;
+                    default:
+                    break;
+                    }
+            }else{
                 jLmessage.setText("Authentification ratée");
             }
         }
@@ -274,7 +292,9 @@ public class Application extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu AdminMenu;
     private javax.swing.JMenu MedecinMenu;
+    private javax.swing.JMenu SecretaireMenu;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem copyMenuItem;
@@ -282,8 +302,6 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
     private javax.swing.JButton jBconnection;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
