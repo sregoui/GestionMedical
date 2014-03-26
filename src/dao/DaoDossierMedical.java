@@ -7,10 +7,17 @@
 package dao;
 
 import contrat.IDao;
+import static contrat.IDao.bdd;
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import metier.patient.*;
-import metier.personnel.Utilisateur;
+
 
 /**
  *
@@ -35,7 +42,26 @@ public class DaoDossierMedical implements IDao<DossierMedical> {
 
     @Override
     public List<DossierMedical> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<DossierMedical> l = new ArrayList<>();
+        try {
+            Connection cnx = bdd.seConnecter();
+            String sql = "select * from DossierMedical";
+            Statement stat = cnx.createStatement();
+            ResultSet res = stat.executeQuery(sql);
+
+            while (res.next()) {
+               DossierMedical dm = new DossierMedical(res.getInt("id_dossier_medical"), res.getInt("id_dossier_patient_dm"), res.getString("taille"), res.getString("poids"), res.getString("allergie"), res.getString("antecedants"), res.getString("contres_indications"), res.getString("vaccins"));
+                l.add(dm);
+                
+            }
+
+            bdd.seDeconnecter(cnx);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DaoUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return l;
     }
 
     @Override

@@ -10,23 +10,24 @@ import contrat.IDao;
 import factory.FactoryDao;
 import java.util.List;
 import metier.personnel.Utilisateur;
+import vue.medecin.GestionDossierMedical;
 
 /**
  *
  * @author Samia
  */
 public class Application extends javax.swing.JFrame {
-    private List l;
-    private String userText;
+    private List listeUtilisateur; 
+    private String userText; 
     private String mdpText;
-    private Utilisateur u;
+    private Utilisateur u; 
 
     /**
      * Creates new form Application
      */
     public Application() {
         initComponents();
-        this.menuBar.setVisible(false);
+        this.menuBar.setVisible(false); // n'affiche pas le menu pendant l'authentification
        
     }
 
@@ -52,9 +53,8 @@ public class Application extends javax.swing.JFrame {
         openMenuItem = new javax.swing.JMenuItem();
         saveMenuItem = new javax.swing.JMenuItem();
         saveAsMenuItem = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
         MedecinMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
+        ItemGererDossierMedical = new javax.swing.JMenuItem();
         copyMenuItem = new javax.swing.JMenuItem();
         pasteMenuItem = new javax.swing.JMenuItem();
         deleteMenuItem = new javax.swing.JMenuItem();
@@ -132,51 +132,41 @@ public class Application extends javax.swing.JFrame {
         SecretaireMenu.setText("Secretaire");
 
         openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Open");
+        openMenuItem.setText("Gerer DossierAdministratif");
         SecretaireMenu.add(openMenuItem);
 
         saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Save");
+        saveMenuItem.setText("Gestion Paiement");
         SecretaireMenu.add(saveMenuItem);
 
         saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Save As ...");
-        saveAsMenuItem.setDisplayedMnemonicIndex(5);
+        saveAsMenuItem.setText("Gerer Rdz");
         SecretaireMenu.add(saveAsMenuItem);
-
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Exit");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
-            }
-        });
-        SecretaireMenu.add(exitMenuItem);
 
         menuBar.add(SecretaireMenu);
 
         MedecinMenu.setMnemonic('e');
         MedecinMenu.setText("Medecin");
 
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Gerer Dossier Medical");
-        cutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        ItemGererDossierMedical.setMnemonic('t');
+        ItemGererDossierMedical.setText("Gerer Dossier Medical");
+        ItemGererDossierMedical.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cutMenuItemActionPerformed(evt);
+                ItemGererDossierMedicalActionPerformed(evt);
             }
         });
-        MedecinMenu.add(cutMenuItem);
+        MedecinMenu.add(ItemGererDossierMedical);
 
         copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
+        copyMenuItem.setText("Gerer ses factures");
         MedecinMenu.add(copyMenuItem);
 
         pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
+        pasteMenuItem.setText("Voir Médicaments");
         MedecinMenu.add(pasteMenuItem);
 
         deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
+        deleteMenuItem.setText("Creer Documents");
         MedecinMenu.add(deleteMenuItem);
 
         menuBar.add(MedecinMenu);
@@ -185,11 +175,11 @@ public class Application extends javax.swing.JFrame {
         AdminMenu.setText("Directeur");
 
         contentMenuItem.setMnemonic('c');
-        contentMenuItem.setText("Contents");
+        contentMenuItem.setText("Statistique");
         AdminMenu.add(contentMenuItem);
 
         aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
+        aboutMenuItem.setText("Gestion Personnel");
         AdminMenu.add(aboutMenuItem);
 
         menuBar.add(AdminMenu);
@@ -222,18 +212,18 @@ public class Application extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
-
     private void jBconnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconnectionActionPerformed
 
-        IDao dao = FactoryDao.getDAO("Utilisateur");
-        l = dao.selectAll();
-        userText = this.jTUser.getText();
+       
+        IDao dao = FactoryDao.getDAO("Utilisateur"); //Appel de la factory pour reccuperer le DaoUtilisateur
+        listeUtilisateur = dao.selectAll(); //Reccupération d'un type liste via la méthode selectAll (ensemble des users)
+        userText = this.jTUser.getText();//Reccupération des champs saisies
         mdpText = this.jTpassword.getText();
 
-        for(Object o: l){
+        /**
+         * Authentification en bouclant sur la liste d'utilisateur
+         */      
+        for(Object o: listeUtilisateur){
             u = (Utilisateur) o;
 
             if(u.getLogin().equals(userText) && u.getPassword().equals(mdpText))
@@ -244,7 +234,7 @@ public class Application extends javax.swing.JFrame {
                 this.menuBar.setVisible(true);
                 
                     switch (u.getId_role()){
-                    case 1:
+                    case 1://Cas d'un admin(DIRECTEUR)
                         this.MedecinMenu.setVisible(false);
                         this.SecretaireMenu.setVisible(false);
                         this.RadiologieMenu.setVisible(false);
@@ -253,7 +243,7 @@ public class Application extends javax.swing.JFrame {
                         this.DentisteMenu.setVisible(false);
                         this.AdminMenu.setVisible(true);
                     break;
-                    case 2:
+                    case 2://Cas d'une secretaire
                         this.MedecinMenu.setVisible(false);
                         this.SecretaireMenu.setVisible(true);
                         this.RadiologieMenu.setVisible(false);
@@ -262,7 +252,7 @@ public class Application extends javax.swing.JFrame {
                         this.DentisteMenu.setVisible(false);
                         this.AdminMenu.setVisible(false);
                     break;
-                    case 3:
+                    case 3://Cas d'un generaliste
                         this.MedecinMenu.setVisible(true);
                         this.GeneralisteMenu.setVisible(true);
                         this.RadiologieMenu.setVisible(false);
@@ -271,7 +261,7 @@ public class Application extends javax.swing.JFrame {
                         this.SecretaireMenu.setVisible(false);
                         this.AdminMenu.setVisible(false);
                     break;
-                    case 4:
+                    case 4://Cas d'un Dentiste
                         this.MedecinMenu.setVisible(true);
                         this.DentisteMenu.setVisible(true);
                         this.RadiologieMenu.setVisible(false);
@@ -280,7 +270,7 @@ public class Application extends javax.swing.JFrame {
                         this.SecretaireMenu.setVisible(false);
                         this.AdminMenu.setVisible(false);
                     break;
-                    case 5:
+                    case 5://Cas d'un Radiologue
                         this.MedecinMenu.setVisible(true);
                         this.RadiologieMenu.setVisible(true);
                         this.GeneralisteMenu.setVisible(false);
@@ -298,9 +288,13 @@ public class Application extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBconnectionActionPerformed
 
-    private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed
+    private void ItemGererDossierMedicalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemGererDossierMedicalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cutMenuItemActionPerformed
+        this.internalFrameGestionMedical = new GestionDossierMedical();
+        internalFrameGestionMedical.setTitle("Gestion User");
+        this.desktopPane.add(this.internalFrameGestionMedical);
+        internalFrameGestionMedical.setTitle("Gestion des Patients");
+    }//GEN-LAST:event_ItemGererDossierMedicalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,16 +336,15 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JMenu ChirurgienMenu;
     private javax.swing.JMenu DentisteMenu;
     private javax.swing.JMenu GeneralisteMenu;
+    private javax.swing.JMenuItem ItemGererDossierMedical;
     private javax.swing.JMenu MedecinMenu;
     private javax.swing.JMenu RadiologieMenu;
     private javax.swing.JMenu SecretaireMenu;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JButton jBconnection;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
@@ -365,5 +358,5 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables
-
+private GestionDossierMedical internalFrameGestionMedical;
 }
