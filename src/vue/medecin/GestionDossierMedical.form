@@ -127,15 +127,17 @@
                                               </Group>
                                           </Group>
                                           <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jTPoids" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jTTaille" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jScrollPane2" alignment="0" pref="342" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jScrollPane2" alignment="0" min="-2" pref="342" max="-2" attributes="0"/>
+                                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                                  <Component id="jTTaille" alignment="1" min="-2" pref="52" max="-2" attributes="0"/>
+                                                  <Component id="jTPoids" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace pref="51" max="32767" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
                                           <Component id="jScrollPane4" min="-2" pref="342" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>

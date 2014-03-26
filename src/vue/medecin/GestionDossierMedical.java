@@ -6,18 +6,34 @@
 
 package vue.medecin;
 
+import contrat.IDao;
+import factory.FactoryDao;
+import java.util.Vector;
+import metier.personnel.Utilisateur;
+
 /**
  *
  * @author SAMIA HOME
  */
-public class GestionDossierMedical extends javax.swing.JInternalFrame {
+public final class GestionDossierMedical extends javax.swing.JInternalFrame {
 
+    private Utilisateur user;
+    private Vector<Utilisateur> p;
     /**
      * Creates new form GestionDossierMedical
      */
     public GestionDossierMedical() {
         initComponents();
+        initListPatient();
         this.setVisible(true);
+    }
+    
+    public void initListPatient(){
+        this.jListPatient.clearSelection();
+        IDao dao = FactoryDao.getDAO("Utilisateur");
+        p = new Vector<Utilisateur>(dao.selectAll());
+        this.jListPatient.setListData(p);
+        
     }
 
     /**
@@ -227,13 +243,14 @@ public class GestionDossierMedical extends javax.swing.JInternalFrame {
                                                 .addComponent(jLabel4)
                                                 .addComponent(jLabel5)))
                                         .addGap(67, 67, 67)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTPoids)
-                                            .addComponent(jTTaille)
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jTTaille, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jTPoids, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel8)
@@ -345,6 +362,8 @@ public class GestionDossierMedical extends javax.swing.JInternalFrame {
 
     private void jListPatientValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPatientValueChanged
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_jListPatientValueChanged
 
 
