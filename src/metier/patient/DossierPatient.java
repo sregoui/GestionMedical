@@ -126,7 +126,7 @@ public class DossierPatient extends Metier implements Serializable{
 
     @Override
     public String toString() {
-        return "DossierPatient{" + "id_dossierPatient=" + id_dossierPatient + ", nom=" + nom + ", prenom=" + prenom + ", sexe=" + sexe + ", date_de_naissance=" + date_de_naissance + ", nss=" + nss + ", adresse=" + adresse + ", ville=" + ville + ", zip_code=" + zip_code + '}';
+        return  nom + " " + prenom ;
     }
      
     
