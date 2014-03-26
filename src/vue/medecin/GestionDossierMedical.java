@@ -7,6 +7,7 @@
 package vue.medecin;
 
 import contrat.IDao;
+import contrat.Metier;
 import factory.FactoryDao;
 import java.util.Vector;
 import metier.patient.DossierMedical;
@@ -21,19 +22,23 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
 
     private Utilisateur user;
     private Vector<Utilisateur> p;
+    private DossierPatient Dppp;
     /**
      * Creates new form GestionDossierMedical
      */
-    public GestionDossierMedical() {
+    public GestionDossierMedical(Utilisateur user) {
         initComponents();
-        initListPatient();
+        System.out.println(user.getId());
+        initListPatient(user);
         this.setVisible(true);
     }
     
-    public void initListPatient(){
+    public void initListPatient(Utilisateur user){
         this.jListPatient.clearSelection();
+         System.out.println(user.getId());
         IDao dao = FactoryDao.getDAO("DossierMedical");
-        p = new Vector<Utilisateur>(dao.selectAll());
+        p = new Vector<Utilisateur>(dao.selectAll(user));
+        
         this.jListPatient.setListData(p);   
 
     }
@@ -135,6 +140,11 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
         jTAutocompl.setText("Taper Nom du Patient");
 
         jButton1.setText("Valider Modification");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jBOrdonnance.setText("Creer Documents");
         jBOrdonnance.addActionListener(new java.awt.event.ActionListener() {
@@ -333,15 +343,15 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
 
     private void jListPatientValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPatientValueChanged
         // TODO add your handling code here:
-         
-        DossierMedical dm = (DossierMedical) this.jListPatient.getSelectedValue();
-        
-        //dm.getId_dossier_patient_dm()
 
-        this.jLabelNom.setText(dm.getNom());
-        this.jLabelPrenom.setText(dm.getPrenom());
-        this.jLabelDateNaissance.setText(dm.getDate_de_naissance());
-        this.jLabelSexe.setText(dm.getSexe());    
+        DossierMedical dm = (DossierMedical) this.jListPatient.getSelectedValue();
+        IDao daoA = FactoryDao.getDAO("DossierPatient");
+        Dppp = (DossierPatient) daoA.selectById(dm.getId_dossier_patient_dm());
+
+        this.jLabelNom.setText(Dppp.getNom());
+        this.jLabelPrenom.setText(Dppp.getPrenom());
+        this.jLabelDateNaissance.setText(Dppp.getDate_de_naissance());
+        this.jLabelSexe.setText(Dppp.getSexe());    
         this.jTTaille.setText(dm.getTaille());
         this.jTPoids.setText(dm.getPoids());
         this.jTAllergies.setText(dm.getAllergie());
@@ -350,6 +360,10 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
         this.jTVaccins.setText(dm.getVaccins());
 
     }//GEN-LAST:event_jListPatientValueChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

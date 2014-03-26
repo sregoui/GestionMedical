@@ -16,20 +16,21 @@ import java.io.Serializable;
 public class DossierPatient extends Metier implements Serializable{
     
     protected int id_dossierPatient;
-    private String nom;
-    private String prenom;
+    protected String nom;
+    protected String prenom;
     private String sexe;
     private String date_de_naissance;
     private String nss;
     private String adresse;
     private String ville;
     private String zip_code;
+    private int id_user;
+    private int id_role;
 
     public DossierPatient() {
     }
-   
 
-    public DossierPatient(int id_dossierPatient, String nom, String prenom, String sexe, String date_de_naissance, String nss, String adresse, String ville, String zip_code) {
+    public DossierPatient(int id_dossierPatient, String nom, String prenom, String sexe, String date_de_naissance, String nss, String adresse, String ville, String zip_code, int id_user, int id_role) {
         this.id_dossierPatient = id_dossierPatient;
         this.nom = nom;
         this.prenom = prenom;
@@ -39,9 +40,11 @@ public class DossierPatient extends Metier implements Serializable{
         this.adresse = adresse;
         this.ville = ville;
         this.zip_code = zip_code;
+        this.id_user = id_user;
+        this.id_role = id_role;
     }
 
-    public DossierPatient(String nom, String prenom, String sexe, String date_de_naissance, String nss, String adresse, String ville, String zip_code) {
+    public DossierPatient(String nom, String prenom, String sexe, String date_de_naissance, String nss, String adresse, String ville, String zip_code, int id_user, int id_role) {
         this.nom = nom;
         this.prenom = prenom;
         this.sexe = sexe;
@@ -50,7 +53,12 @@ public class DossierPatient extends Metier implements Serializable{
         this.adresse = adresse;
         this.ville = ville;
         this.zip_code = zip_code;
+        this.id_user = id_user;
+        this.id_role = id_role;
     }
+   
+    
+   
 
     public int getId_dossierPatient() {
         return id_dossierPatient;

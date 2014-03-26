@@ -10,6 +10,7 @@ import contrat.IDao;
 import java.sql.ResultSet;
 import java.util.List;
 import metier.gestionRdz.*;
+import metier.personnel.Utilisateur;
 
 
 /**
@@ -50,6 +51,16 @@ public class DaoRdz implements IDao<Rdz> {
 
     @Override
     public Rdz selectById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Rdz> selectAllbyMedecin() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List selectAll(Utilisateur user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
