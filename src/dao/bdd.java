@@ -20,9 +20,9 @@ import java.util.logging.Logger;
 public class bdd {
     
     private Connection cnx;
-    private String username = "";
+    private String username = "root";
     private String password = "";
-    private String url = "jdbc:mysql://";
+    private String url = "jdbc:mysql://localhost/gestion_medical";
 
     public Connection seConnecter() throws ClassNotFoundException {
         try {

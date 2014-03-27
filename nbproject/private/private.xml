@@ -3,6 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Github/GestionMedical/src/metier/patient/DossierPatient.java</file>
+            <file>file:/C:/Github/GestionMedical/src/dao/DaoDossierMedical.java</file>
+            <file>file:/C:/Github/GestionMedical/src/dao/DaoDossierPatient.java</file>
+            <file>file:/C:/Github/GestionMedical/src/vue/medecin/GestionDossierMedical.java</file>
+            <file>file:/C:/Github/GestionMedical/src/metier/patient/DossierMedical.java</file>
             <file>file:/C:/Github/GestionMedical/src/vue/general/Application.java</file>
         </group>
     </open-files>
