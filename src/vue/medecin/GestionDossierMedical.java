@@ -331,7 +331,7 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
         DossierMedical dm = (DossierMedical) this.jListPatient.getSelectedValue();
         IDao daoA = FactoryDao.getDAO("DossierPatient");
         
-        dp = (DossierPatient) daoA.selectById(3);
+        dp = (DossierPatient) daoA.selectById(dm.getId_dossier_patient_dm());
 
         this.jLabelNom.setText(dp.getNom());
         this.jLabelPrenom.setText(dp.getPrenom());

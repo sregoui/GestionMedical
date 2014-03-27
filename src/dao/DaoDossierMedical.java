@@ -44,7 +44,27 @@ public class DaoDossierMedical implements IDao<DossierMedical> {
 
     @Override
     public void update(DossierMedical objet) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+            Connection cnx = bdd.seConnecter();
+
+            String sql = "UPDATE `dossierMedical` SET `id_dossier_patient_dm`=?,`taille`=?,`poids`=?,`allergie`=?,`antecedants`=?,`contre_indications`=?,`vaccins`=? WHERE id_dossier_medical=?";
+            PreparedStatement stat = cnx.prepareStatement(sql);
+            stat.setInt(1, objet.getId_dossier_patient_dm());
+            stat.setString(2, objet.getPoids());
+            stat.setString(3, objet.getTaille());
+            stat.setString(4, objet.getAllergie());
+            stat.setString(5, objet.getAntecedants());
+            stat.setString(6, objet.getContres_indications());
+            stat.setString(7, objet.getVaccins());
+            stat.setInt(8, objet.getId_dossier_medical());
+            stat.executeUpdate();
+            
+            bdd.seDeconnecter(cnx);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DaoDossierMedical.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoDossierMedical.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
