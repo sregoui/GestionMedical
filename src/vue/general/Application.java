@@ -8,8 +8,12 @@ package vue.general;
 
 import contrat.IDao;
 import factory.FactoryDao;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import metier.personnel.Utilisateur;
+import vue.medecin.FrameGenerique;
 import vue.medecin.GestionDossierMedical;
 
 /**
@@ -163,6 +167,11 @@ public class Application extends javax.swing.JFrame {
 
         pasteMenuItem.setMnemonic('p');
         pasteMenuItem.setText("Voir Médicaments");
+        pasteMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pasteMenuItemActionPerformed(evt);
+            }
+        });
         MedecinMenu.add(pasteMenuItem);
 
         deleteMenuItem.setMnemonic('d');
@@ -213,8 +222,11 @@ public class Application extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBconnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconnectionActionPerformed
-
-       
+        
+        
+        /**
+         * Après le clic sur le bouton se connecter
+         */
         IDao dao = FactoryDao.getDAO("Utilisateur"); //Appel de la factory pour reccuperer le DaoUtilisateur
         listeUtilisateur = dao.selectAll(); //Reccupération d'un type liste via la méthode selectAll (ensemble des users)
         userText = this.jTUser.getText();//Reccupération des champs saisies
@@ -234,6 +246,7 @@ public class Application extends javax.swing.JFrame {
                 this.jInternalFrame1.setVisible(false);
                 this.menuBar.setVisible(true);
                 
+                //Menu selon le role de l'utilisateur
                     switch (u.getId_role()){
                     case 1://Cas d'un admin(DIRECTEUR)
                         this.MedecinMenu.setVisible(false);
@@ -291,12 +304,24 @@ public class Application extends javax.swing.JFrame {
     }//GEN-LAST:event_jBconnectionActionPerformed
 
     private void ItemGererDossierMedicalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemGererDossierMedicalActionPerformed
-        // TODO add your handling code here:
+   
+        
+        //On va reccuperer l'InternalFrame GestionDossierMedical lors du clic sur le sous-menu
         this.internalFrameGestionMedical = new GestionDossierMedical(u);
-        internalFrameGestionMedical.setTitle("Gestion User");
         this.desktopPane.add(this.internalFrameGestionMedical);
         internalFrameGestionMedical.setTitle("Gestion des Patients");
+        
     }//GEN-LAST:event_ItemGererDossierMedicalActionPerformed
+
+    private void pasteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteMenuItemActionPerformed
+        try {
+            this.internalFrameMedicament = new FrameGenerique();
+        } catch (SQLException ex) {
+            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        internalFrameMedicament.setTitle("Medicaments");
+        this.desktopPane.add(this.internalFrameMedicament);
+    }//GEN-LAST:event_pasteMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,4 +386,5 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables
 private GestionDossierMedical internalFrameGestionMedical;
+private FrameGenerique internalFrameMedicament;
 }

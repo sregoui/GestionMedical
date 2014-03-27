@@ -20,9 +20,9 @@ import metier.personnel.Utilisateur;
  */
 public final class GestionDossierMedical extends javax.swing.JInternalFrame {
 
-    private Utilisateur user;
-    private Vector p;
-    private DossierPatient dp;
+    private Utilisateur user; //Reutilisation des infos user
+    private Vector p; 
+    private DossierPatient dp; 
     private DossierMedical dm;
     
     /**
@@ -30,17 +30,17 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
      */
     public GestionDossierMedical(Utilisateur user) {
         initComponents();
-       
-        initListPatient(user);
+        initListPatient(user); //Permet l'affichage de la liste
         this.setVisible(true);
     }
     
     public void initListPatient(Utilisateur user){
         this.jListPatient.clearSelection();
+        //Reccuperation de l'ensemble des dossier Medicaux selon l'id de l'user
         IDao dao = FactoryDao.getDAO("DossierMedical");
         p = new Vector<>(dao.selectAll(user));
         
-        this.jListPatient.setListData(p);   
+        this.jListPatient.setListData(p);   //Chargement de la liste
 
     }
 
@@ -328,10 +328,10 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
     private void jListPatientValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPatientValueChanged
         // TODO add your handling code here:
 
-        DossierMedical dm = (DossierMedical) this.jListPatient.getSelectedValue();
-        IDao daoA = FactoryDao.getDAO("DossierPatient");
+        DossierMedical dm = (DossierMedical) this.jListPatient.getSelectedValue(); //Reccupération de la valeur de l'élément séléctionner
+        IDao daoA = FactoryDao.getDAO("DossierPatient"); //Appel de la daoDossierPattient via la factory
         
-        dp = (DossierPatient) daoA.selectById(dm.getId_dossier_patient_dm());
+        dp = (DossierPatient) daoA.selectById(dm.getId_dossier_patient_dm()); //Reccupération dans une variable de type dossierPatient des infos
 
         this.jLabelNom.setText(dp.getNom());
         this.jLabelPrenom.setText(dp.getPrenom());
@@ -358,7 +358,7 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
             m.setContres_indications(jTContreI.getText());
             m.setVaccins(jTVaccins.getText());
             m.setId_dossier_medical(m.getId_dossier_medical());
-            daoA.update(m);
+            daoA.update(m); //Mise à jour des infos via la méthode update
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

@@ -22,7 +22,8 @@ import metier.personnel.Utilisateur;
 
 
 /**
- *
+ * Classe DaoDossierMedical
+ * Permet de reccuperer l'ensemble des informations concernant le dossierMedical
  * @author Samia
  */
 public class DaoDossierMedical implements IDao<DossierMedical> {
@@ -47,7 +48,7 @@ public class DaoDossierMedical implements IDao<DossierMedical> {
          try {
             Connection cnx = bdd.seConnecter();
 
-            String sql = "UPDATE `dossierMedical` SET `id_dossier_patient_dm`=?,`taille`=?,`poids`=?,`allergie`=?,`antecedants`=?,`contre_indications`=?,`vaccins`=? WHERE id_dossier_medical=?";
+            String sql = "UPDATE `dossierMedical` SET `id_dossier_patient_dm`=?,`taille`=?,`poids`=?,`allergie`=?,`antecedants`=?,`contres_indications`=?,`vaccins`=? WHERE id_dossier_medical=?";
             PreparedStatement stat = cnx.prepareStatement(sql);
             stat.setInt(1, objet.getId_dossier_patient_dm());
             stat.setString(2, objet.getPoids());
@@ -77,6 +78,10 @@ public class DaoDossierMedical implements IDao<DossierMedical> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Methode qui reccupere la liste des dossierMedical par Medecin
+     * @return List
+     */
     @Override
     public List<DossierMedical> selectAllbyMedecin() {
          List<DossierMedical> l = new ArrayList<>();
@@ -91,7 +96,6 @@ public class DaoDossierMedical implements IDao<DossierMedical> {
                 l.add(dm);
                 
             }
-
             bdd.seDeconnecter(cnx);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DaoUtilisateur.class.getName()).log(Level.SEVERE, null, ex);

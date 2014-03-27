@@ -7,8 +7,13 @@
 package dao;
 
 import contrat.IDao;
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import metier.patient.*;
 import metier.personnel.Utilisateur;
 
@@ -45,7 +50,23 @@ public class DaoMedicament implements IDao<Medicament> {
 
     @Override
     public ResultSet selectRetunRes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       ResultSet res = null;
+         Connection cnx = null;
+        try {
+             cnx = bdd.seConnecter();
+            String sql = "SELECT `id_medicament`, `libelle`FROM `medicament`";
+            Statement stat = cnx.createStatement();
+            res = stat.executeQuery(sql);
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DaoMedicament.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoMedicament.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+//            bdd.seDeconnecter(cnx);
+        }
+        return res;
+
     }
 
     @Override
