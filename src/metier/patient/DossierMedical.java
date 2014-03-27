@@ -22,21 +22,23 @@ public class DossierMedical extends DossierPatient {
     private String antecedants;
     private String contres_indications;
     private String vaccins;
-
+    private int id_user;
+    
     public DossierMedical() {
     }
     
     
 
-    public DossierMedical(int id_dossier_medical, int id_dossier_patient_dm, String taille, String poids, String allergie, String antecedants, String contres_indications, String vaccins) {
+    public DossierMedical(int id_dossier_medical, int id_dossier_patient_dm, String taille, String poids, String allergie, String antecedants, String contres_indications, String vaccins, int id_user) {
         this.id_dossier_medical = id_dossier_medical;
-        super.id_dossierPatient = id_dossier_patient_dm;
+        this.id_dossier_patient_dm = id_dossier_patient_dm;
         this.taille = taille;
         this.poids = poids;
         this.allergie = allergie;
         this.antecedants = antecedants;
         this.contres_indications = contres_indications;
         this.vaccins = vaccins;
+        this.id_user = id_user;
     }
 
     public int getId_dossier_medical() {
@@ -103,9 +105,20 @@ public class DossierMedical extends DossierPatient {
         this.vaccins = vaccins;
     }
 
+    public int getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+    
+    
+
     @Override
     public String toString() {
-        return "DossierMedical{" + "id_dossier_medical=" + id_dossier_medical + ", id_dossier_patient_dm=" + id_dossier_patient_dm + ", taille=" + taille + ", poids=" + poids + ", allergie=" + allergie + ", antecedants=" + antecedants + ", contres_indications=" + contres_indications + ", vaccins=" + vaccins + '}';
+     
+        return "Dossier n°" + id_dossier_medical;
     }
     
 }

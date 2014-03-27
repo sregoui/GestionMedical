@@ -10,10 +10,12 @@ package contrat;
 import dao.bdd;
 import java.sql.ResultSet;
 import java.util.List;
+import metier.personnel.Utilisateur;
 
 /**
  *
  * @author Samia
+ * @param <T>
  */
 public interface IDao<T extends Metier> {
     
@@ -26,4 +28,7 @@ public interface IDao<T extends Metier> {
     public void update(T objet);
     public ResultSet selectRetunRes();
     public T selectById(int id);
+    public List<T> selectAllbyMedecin();
+
+    public List selectAll(Utilisateur user);
 }

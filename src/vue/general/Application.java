@@ -228,6 +228,7 @@ public class Application extends javax.swing.JFrame {
 
             if(u.getLogin().equals(userText) && u.getPassword().equals(mdpText))
             {
+                u = new Utilisateur(u.getId(),u.getLogin(),u.getPassword(),u.getId_role(),u.getNom(),u.getPrenom(),u.getEmail(),u.getTelPort(),u.getTelFixe());
                 jLmessage.setText("Authentification réussie");
 
                 this.jInternalFrame1.setVisible(false);
@@ -282,6 +283,7 @@ public class Application extends javax.swing.JFrame {
                     default:
                     break;
                     }
+            break;
             }else{
                 jLmessage.setText("Authentification ratée");
             }
@@ -290,7 +292,7 @@ public class Application extends javax.swing.JFrame {
 
     private void ItemGererDossierMedicalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemGererDossierMedicalActionPerformed
         // TODO add your handling code here:
-        this.internalFrameGestionMedical = new GestionDossierMedical();
+        this.internalFrameGestionMedical = new GestionDossierMedical(u);
         internalFrameGestionMedical.setTitle("Gestion User");
         this.desktopPane.add(this.internalFrameGestionMedical);
         internalFrameGestionMedical.setTitle("Gestion des Patients");
