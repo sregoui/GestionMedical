@@ -17,6 +17,7 @@ import java.util.List;
  */
 public interface IDao<T extends Metier> {
     
+    
     public bdd bdd = new bdd(); 
     public void insert(T objet);
     public void insertFromList(List l);
