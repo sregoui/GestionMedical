@@ -13,8 +13,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import metier.personnel.Utilisateur;
+import vue.medecin.FactureFrame;
 import vue.medecin.FrameGenerique;
 import vue.medecin.GestionDossierMedical;
+import vue.medecin.VoirDocument;
 
 /**
  *
@@ -32,10 +34,10 @@ public class Application extends javax.swing.JFrame {
     public Application() {
         initComponents();
         this.menuBar.setVisible(false); // n'affiche pas le menu pendant l'authentification
-        this.jBDocument.setVisible(false);
-        this.jBFacture.setVisible(false);
-        this.jBMedicament.setVisible(false);
-        this.jBUtilitaire.setVisible(false);
+        this.jButton5.setVisible(false);
+        this.jButton1.setVisible(false);
+        this.jButton2.setVisible(false);
+        this.jButton3.setVisible(false);
         this.ItemGererDossierMedical2.setVisible(false);
        
     }
@@ -57,17 +59,20 @@ public class Application extends javax.swing.JFrame {
         jTpassword = new javax.swing.JTextField();
         jBconnection = new javax.swing.JButton();
         jLmessage = new javax.swing.JLabel();
-        jBFacture = new javax.swing.JButton();
-        jBMedicament = new javax.swing.JButton();
-        jBUtilitaire = new javax.swing.JButton();
-        jBDocument = new javax.swing.JButton();
-        ItemGererDossierMedical3 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        ItemGererDossierMedical2 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         SecretaireMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
         saveMenuItem = new javax.swing.JMenuItem();
         saveAsMenuItem = new javax.swing.JMenuItem();
         MedecinMenu = new javax.swing.JMenu();
+        copyMenuItem = new javax.swing.JMenuItem();
+        pasteMenuItem = new javax.swing.JMenuItem();
+        deleteMenuItem = new javax.swing.JMenuItem();
         AdminMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
@@ -138,55 +143,50 @@ public class Application extends javax.swing.JFrame {
         desktopPane.add(jInternalFrame1);
         jInternalFrame1.setBounds(520, 220, 250, 190);
 
-        jBFacture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/facture.png"))); // NOI18N
-        jBFacture.setText("FACTURE");
-        jBFacture.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/facture.png"))); // NOI18N
+        jButton1.setText("FACTURE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBFactureActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        desktopPane.add(jBFacture);
-        jBFacture.setBounds(0, 80, 170, 80);
+        desktopPane.add(jButton1);
+        jButton1.setBounds(0, 80, 170, 80);
 
-        jBMedicament.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/medoc.png"))); // NOI18N
-        jBMedicament.setText("MEDICAMENT");
-        jBMedicament.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/medoc.png"))); // NOI18N
+        jButton2.setText("MEDICAMENT");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBMedicamentActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        desktopPane.add(jBMedicament);
-        jBMedicament.setBounds(0, 160, 170, 80);
+        desktopPane.add(jButton2);
+        jButton2.setBounds(0, 160, 170, 80);
 
-        jBUtilitaire.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/caduccee.png"))); // NOI18N
-        jBUtilitaire.setText("UTILITAIRES");
-        jBUtilitaire.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBUtilitaireActionPerformed(evt);
-            }
-        });
-        desktopPane.add(jBUtilitaire);
-        jBUtilitaire.setBounds(0, 320, 170, 80);
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/caduccee.png"))); // NOI18N
+        jButton3.setText("UTILITAIRES");
+        desktopPane.add(jButton3);
+        jButton3.setBounds(0, 320, 170, 80);
 
-        jBDocument.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/doc.png"))); // NOI18N
-        jBDocument.setText("DOCUMENT");
-        jBDocument.addActionListener(new java.awt.event.ActionListener() {
+        ItemGererDossierMedical2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/trousse.png"))); // NOI18N
+        ItemGererDossierMedical2.setText("DOSSIER ");
+        ItemGererDossierMedical2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBDocumentActionPerformed(evt);
+                ItemGererDossierMedical2ActionPerformed(evt);
             }
         });
-        desktopPane.add(jBDocument);
-        jBDocument.setBounds(0, 240, 170, 80);
+        desktopPane.add(ItemGererDossierMedical2);
+        ItemGererDossierMedical2.setBounds(0, 0, 170, 80);
 
-        ItemGererDossierMedical3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/trousse.png"))); // NOI18N
-        ItemGererDossierMedical3.setText("DOSSIER ");
-        ItemGererDossierMedical3.addActionListener(new java.awt.event.ActionListener() {
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/doc.png"))); // NOI18N
+        jButton5.setText("DOCUMENT");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ItemGererDossierMedical3ActionPerformed(evt);
+                jButton5ActionPerformed(evt);
             }
         });
-        desktopPane.add(ItemGererDossierMedical3);
-        ItemGererDossierMedical3.setBounds(0, 0, 170, 80);
+        desktopPane.add(jButton5);
+        jButton5.setBounds(0, 240, 170, 80);
 
         SecretaireMenu.setMnemonic('f');
         SecretaireMenu.setText("Secretaire");
@@ -208,6 +208,24 @@ public class Application extends javax.swing.JFrame {
         MedecinMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/clients.png"))); // NOI18N
         MedecinMenu.setMnemonic('e');
         MedecinMenu.setText("Medecin");
+
+        copyMenuItem.setMnemonic('y');
+        copyMenuItem.setText("Gerer ses factures");
+        MedecinMenu.add(copyMenuItem);
+
+        pasteMenuItem.setMnemonic('p');
+        pasteMenuItem.setText("Voir Médicaments");
+        pasteMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pasteMenuItemActionPerformed(evt);
+            }
+        });
+        MedecinMenu.add(pasteMenuItem);
+
+        deleteMenuItem.setMnemonic('d');
+        deleteMenuItem.setText("Creer Documents");
+        MedecinMenu.add(deleteMenuItem);
+
         menuBar.add(MedecinMenu);
 
         AdminMenu.setMnemonic('h');
@@ -286,10 +304,10 @@ public class Application extends javax.swing.JFrame {
                         this.ChirurgienMenu.setVisible(false);
                         this.DentisteMenu.setVisible(false);
                         this.AdminMenu.setVisible(true);
-                        this.jBDocument.setVisible(false);
-                        this.jBFacture.setVisible(false);
-                        this.jBMedicament.setVisible(false);
-                        this.jBUtilitaire.setVisible(false);
+                        this.jButton5.setVisible(false);
+                        this.jButton1.setVisible(false);
+                        this.jButton2.setVisible(false);
+                        this.jButton3.setVisible(false);
                         this.ItemGererDossierMedical2.setVisible(false);
                     break;
                     case 2://Cas d'une secretaire
@@ -300,10 +318,10 @@ public class Application extends javax.swing.JFrame {
                         this.ChirurgienMenu.setVisible(false);
                         this.DentisteMenu.setVisible(false);
                         this.AdminMenu.setVisible(false);
-                        this.jBDocument.setVisible(false);
-                        this.jBFacture.setVisible(false);
-                        this.jBMedicament.setVisible(false);
-                        this.jBUtilitaire.setVisible(false);
+                        this.jButton5.setVisible(false);
+                        this.jButton1.setVisible(false);
+                        this.jButton2.setVisible(false);
+                        this.jButton3.setVisible(false);
                         this.ItemGererDossierMedical2.setVisible(false);
                     break;
                     case 3://Cas d'un generaliste
@@ -314,10 +332,10 @@ public class Application extends javax.swing.JFrame {
                         this.SecretaireMenu.setVisible(false);
                         this.AdminMenu.setVisible(false);
                         this.RadiologieMenu.setVisible(false);
-                        this.jBDocument.setVisible(true);
-                        this.jBFacture.setVisible(true);
-                        this.jBMedicament.setVisible(true);
-                        this.jBUtilitaire.setVisible(true);
+                        this.jButton5.setVisible(true);
+                        this.jButton1.setVisible(true);
+                        this.jButton2.setVisible(true);
+                        this.jButton3.setVisible(true);
                         this.ItemGererDossierMedical2.setVisible(true);
                     break;
                     case 4://Cas d'un Dentiste
@@ -328,10 +346,10 @@ public class Application extends javax.swing.JFrame {
                         this.ChirurgienMenu.setVisible(false);
                         this.SecretaireMenu.setVisible(false);
                         this.AdminMenu.setVisible(false);
-                        this.jBDocument.setVisible(true);
-                        this.jBFacture.setVisible(true);
-                        this.jBMedicament.setVisible(true);
-                        this.jBUtilitaire.setVisible(true);
+                        this.jButton5.setVisible(true);
+                        this.jButton1.setVisible(true);
+                        this.jButton2.setVisible(true);
+                        this.jButton3.setVisible(true);
                         this.ItemGererDossierMedical2.setVisible(true);
                     break;
                     case 5://Cas d'un Radiologue
@@ -342,10 +360,10 @@ public class Application extends javax.swing.JFrame {
                         this.DentisteMenu.setVisible(false);
                         this.SecretaireMenu.setVisible(false);
                         this.AdminMenu.setVisible(false);
-                        this.jBDocument.setVisible(true);
-                        this.jBFacture.setVisible(true);
-                        this.jBMedicament.setVisible(true);
-                        this.jBUtilitaire.setVisible(true);
+                        this.jButton5.setVisible(true);
+                        this.jButton1.setVisible(true);
+                        this.jButton2.setVisible(true);
+                        this.jButton3.setVisible(true);
                         this.ItemGererDossierMedical2.setVisible(true);
                     break;
                     default:
@@ -358,25 +376,50 @@ public class Application extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBconnectionActionPerformed
 
-    private void jBFactureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFactureActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBFactureActionPerformed
+    private void ItemGererDossierMedical2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemGererDossierMedical2ActionPerformed
 
-    private void jBMedicamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMedicamentActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBMedicamentActionPerformed
+        //On va reccuperer l'InternalFrame GestionDossierMedical lors du clic
+        this.internalFrameGestionMedical = new GestionDossierMedical(u);
+        this.desktopPane.add(this.internalFrameGestionMedical);
+        internalFrameGestionMedical.setTitle("Gestion des Patients");
+    }//GEN-LAST:event_ItemGererDossierMedical2ActionPerformed
 
-    private void jBDocumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDocumentActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBDocumentActionPerformed
+    private void pasteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteMenuItemActionPerformed
+        try {
+            this.internalFrameMedicament = new FrameGenerique("Medicament");
+        } catch (SQLException ex) {
+            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        internalFrameMedicament.setTitle("Medicaments");
+        this.desktopPane.add(this.internalFrameMedicament);
+    }//GEN-LAST:event_pasteMenuItemActionPerformed
 
-    private void jBUtilitaireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUtilitaireActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jBUtilitaireActionPerformed
+        //On va reccuperer l'InternalFrame VoirDocument lors du clic
+        this.internalVoirDocument = new VoirDocument();
+        this.desktopPane.add(this.internalVoirDocument);
+        internalVoirDocument.setTitle("Gestion des Document");
+    }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void ItemGererDossierMedical3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemGererDossierMedical3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ItemGererDossierMedical3ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        //On va reccuperer l'InternalFrame Facture lors du clic
+        this.internalFacture = new FactureFrame();
+        this.desktopPane.add(this.internalFacture);
+       internalFacture.setTitle("Facture");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            //On va reccuperer l'InternalFrame FrameGenerique lors du clic
+            this.internalFrameMedicament = new FrameGenerique("Medicament");
+        } catch (SQLException ex) {
+            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.desktopPane.add(this.internalFrameMedicament);
+       internalFrameMedicament.setTitle("Medicament");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -418,18 +461,20 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JMenu ChirurgienMenu;
     private javax.swing.JMenu DentisteMenu;
     private javax.swing.JMenu GeneralisteMenu;
-    private javax.swing.JButton ItemGererDossierMedical3;
+    private javax.swing.JButton ItemGererDossierMedical2;
     private javax.swing.JMenu MedecinMenu;
     private javax.swing.JMenu RadiologieMenu;
     private javax.swing.JMenu SecretaireMenu;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
+    private javax.swing.JMenuItem copyMenuItem;
+    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JButton jBDocument;
-    private javax.swing.JButton jBFacture;
-    private javax.swing.JButton jBMedicament;
-    private javax.swing.JButton jBUtilitaire;
     private javax.swing.JButton jBconnection;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -438,9 +483,12 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JTextField jTpassword;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
+    private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables
 private GestionDossierMedical internalFrameGestionMedical;
 private FrameGenerique internalFrameMedicament;
+private VoirDocument internalVoirDocument;
+private FactureFrame internalFacture;
 }
