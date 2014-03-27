@@ -7,8 +7,8 @@
 package vue.medecin;
 
 import contrat.IDao;
-import contrat.Metier;
 import factory.FactoryDao;
+import java.util.List;
 import java.util.Vector;
 import metier.patient.DossierMedical;
 import metier.patient.DossierPatient;
@@ -21,23 +21,24 @@ import metier.personnel.Utilisateur;
 public final class GestionDossierMedical extends javax.swing.JInternalFrame {
 
     private Utilisateur user;
-    private Vector<Utilisateur> p;
-    private DossierPatient Dppp;
+    private Vector p;
+    private DossierPatient dp;
+    private DossierMedical dm;
+    
     /**
      * Creates new form GestionDossierMedical
      */
     public GestionDossierMedical(Utilisateur user) {
         initComponents();
-        System.out.println(user.getId());
+       
         initListPatient(user);
         this.setVisible(true);
     }
     
     public void initListPatient(Utilisateur user){
         this.jListPatient.clearSelection();
-         System.out.println(user.getId());
         IDao dao = FactoryDao.getDAO("DossierMedical");
-        p = new Vector<Utilisateur>(dao.selectAll(user));
+        p = new Vector<>(dao.selectAll(user));
         
         this.jListPatient.setListData(p);   
 
@@ -346,12 +347,13 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
 
         DossierMedical dm = (DossierMedical) this.jListPatient.getSelectedValue();
         IDao daoA = FactoryDao.getDAO("DossierPatient");
-        Dppp = (DossierPatient) daoA.selectById(dm.getId_dossier_patient_dm());
+        
+        dp = (DossierPatient) daoA.selectById(3);
 
-        this.jLabelNom.setText(Dppp.getNom());
-        this.jLabelPrenom.setText(Dppp.getPrenom());
-        this.jLabelDateNaissance.setText(Dppp.getDate_de_naissance());
-        this.jLabelSexe.setText(Dppp.getSexe());    
+        this.jLabelNom.setText(dp.getNom());
+        this.jLabelPrenom.setText(dp.getPrenom());
+        this.jLabelDateNaissance.setText(dp.getDate_de_naissance());
+        this.jLabelSexe.setText(dp.getSexe());    
         this.jTTaille.setText(dm.getTaille());
         this.jTPoids.setText(dm.getPoids());
         this.jTAllergies.setText(dm.getAllergie());

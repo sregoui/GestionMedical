@@ -96,18 +96,17 @@ public class DaoDossierMedical implements IDao<DossierMedical> {
         try {
             //TODO:Voir comment selectionner uniquement les patients par user
             Connection cnx = bdd.seConnecter();
-            String sql = "select * from DossierMedical";
-           // PreparedStatement stat = cnx.prepareStatement(sql);
-           // stat.setInt(1, user.getId());
-            Statement stat = cnx.createStatement();
-            ResultSet res = stat.executeQuery(sql);
-            //res.first();
+            String sql = "select * from DossierMedical where id_user=?";
+            PreparedStatement stat = cnx.prepareStatement(sql);
+            stat.setInt(1, user.getId());
+            // Statement stat = cnx.createStatement();
+            ResultSet res = stat.executeQuery();
             
-
+    
             while (res.next()) {
                
                dm = new DossierMedical(res.getInt("id_dossier_medical"), res.getInt("id_dossier_patient_dm"), res.getString("taille"), res.getString("poids"), res.getString("allergie"), res.getString("antecedants"), res.getString("contres_indications"), res.getString("vaccins"), res.getInt("id_user"));
-                l.add(dm);
+               l.add(dm);
                 
             }
 
