@@ -86,7 +86,12 @@ public class DaoDossierMedical implements IDao<DossierMedical> {
     public List<DossierMedical> selectAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     } 
-
+    
+    /**
+     * Methode qui retourne les dossierMedical à partir de l'id de l'user.
+     * @param user
+     * @return 
+     */
     @Override
     public List<DossierMedical> selectAll(Utilisateur user) {
        
@@ -94,7 +99,7 @@ public class DaoDossierMedical implements IDao<DossierMedical> {
         DossierMedical dm = null;
         
         try {
-            //TODO:Voir comment selectionner uniquement les patients par user
+            
             Connection cnx = bdd.seConnecter();
             String sql = "select * from DossierMedical where id_user=?";
             PreparedStatement stat = cnx.prepareStatement(sql);
