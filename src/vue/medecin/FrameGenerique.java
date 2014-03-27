@@ -5,8 +5,10 @@
  */
 package vue.medecin;
 
+import contrat.IDao;
 import dao.DaoDocument;
 import dao.DaoMedicament;
+import factory.FactoryDao;
 import java.awt.GridLayout;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -30,11 +32,11 @@ public class FrameGenerique extends javax.swing.JInternalFrame {
     private JLabel[] labels;
     private GridLayout gd;
 
-    public FrameGenerique() throws SQLException {
+    public FrameGenerique(String typeDao) throws SQLException {
         initComponents();
         this.btFirst.setEnabled(false);
         this.btPrev.setEnabled(false);
-        DaoMedicament dao = new DaoMedicament();
+        IDao dao = FactoryDao.getDAO(typeDao);
         this.res = dao.selectRetunRes();
         this.resMetaData = this.getMetaData();
         res.first();
@@ -102,7 +104,7 @@ public class FrameGenerique extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 179, Short.MAX_VALUE)
+            .addGap(0, 143, Short.MAX_VALUE)
         );
 
         btFirst.setText("<<");
@@ -172,7 +174,7 @@ public class FrameGenerique extends javax.swing.JInternalFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblNbrEnr)
                 .addGap(35, 35, 35))
         );
@@ -194,10 +196,10 @@ public class FrameGenerique extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

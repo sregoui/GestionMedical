@@ -315,7 +315,7 @@ public class Application extends javax.swing.JFrame {
 
     private void pasteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteMenuItemActionPerformed
         try {
-            this.internalFrameMedicament = new FrameGenerique();
+            this.internalFrameMedicament = new FrameGenerique("Medicament");
         } catch (SQLException ex) {
             Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
         }
