@@ -4,6 +4,13 @@
  */
 package vue.secretaire;
 
+import contrat.IDao;
+import dao.DaoRdz;
+import factory.FactoryDao;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import metier.gestionRdz.Rdz;
+
 /**
  *
  * @author Toiha
@@ -15,6 +22,7 @@ public class SecretaireJFrame extends javax.swing.JFrame {
      */
     public SecretaireJFrame() {
         initComponents();
+        initRdzTable();
     }
 
     /**
@@ -52,21 +60,7 @@ public class SecretaireJFrame extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Patient", "Médecin", "Spécialité", "Date", "Créneau"
@@ -347,4 +341,26 @@ public class SecretaireJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+    
+    
+    public DefaultTableModel RDZList()
+    {
+        String[] columnNames = {"Patient", "Médecin", "Spécialité", "Date", "Créneau"};
+
+        DefaultTableModel dtm = new DefaultTableModel(columnNames , 0);
+//        dtm.setColumnCount(5);
+//        DaoRdz rdzDao = new DaoRdz();
+//        List<Rdz> listRDZ = rdzDao.selectAll();
+//        
+//        for (Rdz r : listRDZ) {
+//            Rdz rdz = (Rdz)r;
+//            dtm.addRow(new Object[]{r.getPatient(), r.getMedecin(), r.getSpecialite(), r.getDate(), r.getCreneau()});
+//        }
+//        dtm.addRow(new Object[]{"test", "test", "test", "test", "test"});
+        return dtm;
+    }
+
+    private void initRdzTable(){
+       jTable1.setModel(RDZList());
+   }
 }
