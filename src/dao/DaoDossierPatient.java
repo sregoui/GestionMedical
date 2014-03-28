@@ -127,7 +127,34 @@ public class DaoDossierPatient implements IDao<DossierPatient> {
 
     @Override
     public List selectAll(Utilisateur user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<DossierPatient> l = new ArrayList<>();
+        DossierPatient dm = null;
+        
+        try {
+            
+            Connection cnx = bdd.seConnecter();
+            String sql = "select * from DossierPatient where id_user=?";
+            PreparedStatement stat = cnx.prepareStatement(sql);
+            stat.setInt(1, user.getId());
+            // Statement stat = cnx.createStatement();
+            ResultSet res = stat.executeQuery();
+            
+    
+            while (res.next()) {
+               
+               dm = new DossierPatient(res.getInt("id_dossier_patient"), res.getString("nom"), res.getString("prenom"), res.getString("sexe"), res.getString("date_de_naissance"), res.getString("nss"), res.getString("adresse"), res.getString("ville"), res.getString("zip_code"), res.getInt("id_user"), res.getInt("id_role"));
+               
+               l.add(dm);
+                
+            }
+
+            bdd.seDeconnecter(cnx);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DaoUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return l;
     }
 
     @Override

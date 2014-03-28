@@ -86,6 +86,7 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
         jTHistorique = new javax.swing.JTable();
         jBDocument = new javax.swing.JButton();
         jLabelDateDuJour = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -172,6 +173,8 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton2.setText("Facturer");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -207,7 +210,9 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jBOrdonnance)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jBDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(jBDocument, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))))
                                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -258,12 +263,13 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4)
                             .addComponent(jTTaille, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelNom))
-                        .addGap(9, 9, 9)
+                        .addGap(8, 8, 8)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jTPoids, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelPrenom))
-                        .addGap(15, 15, 15)
+                            .addComponent(jLabelPrenom)
+                            .addComponent(jButton2))
+                        .addGap(13, 13, 13)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
@@ -368,6 +374,7 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBDocument;
     private javax.swing.JButton jBOrdonnance;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -394,7 +394,7 @@ public class Application extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         //On va reccuperer l'InternalFrame Facture lors du clic
-        this.internalFacture = new FactureFrame();
+        this.internalFacture = new FactureFrame(m);
         this.desktopPane.add(this.internalFacture);
        internalFacture.setTitle("Facture");
     }//GEN-LAST:event_jButton1ActionPerformed

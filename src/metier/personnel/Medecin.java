@@ -36,4 +36,35 @@ public class Medecin extends Utilisateur {
         this.dossierMedical = dossierMedical;
     }
 
+    public List<DossierMedical> getDossierMedical() {
+        return dossierMedical;
+    }
+
+    public void setDossierMedical(List<DossierMedical> dossierMedical) {
+        this.dossierMedical = dossierMedical;
+    }
+
+    public List<Facture> getFacture() {
+        return facture;
+    }
+
+    public void setFacture(List<Facture> facture) {
+        this.facture = facture;
+    }
+
+    public List<Rdz> getRdz() {
+        return rdz;
+    }
+
+    public void setRdz(List<Rdz> rdz) {
+        this.rdz = rdz;
+    }
+
+    @Override
+    public String toString() {
+        return "Medecin{" + "dossierMedical=" + dossierMedical + ", facture=" + facture + ", rdz=" + rdz + '}';
+    }
+    
+    
+
 }
