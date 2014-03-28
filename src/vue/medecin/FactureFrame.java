@@ -8,7 +8,17 @@ package vue.medecin;
 
 import contrat.IDao;
 import factory.FactoryDao;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.text.DateFormat;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import metier.facturation.Facture;
+import metier.patient.DossierMedical;
 import metier.patient.DossierPatient;
 import metier.personnel.Medecin;
 
@@ -21,6 +31,9 @@ public class FactureFrame extends javax.swing.JInternalFrame {
     private Medecin medecin; //Reutilisation des infos user
     private Vector p; 
     private DossierPatient dp; 
+    private DefaultTableModel tableModel;
+    private ResultSet res;
+    private ResultSetMetaData meta;
     /**
      * Creates new form Facture
      */
@@ -38,6 +51,8 @@ public class FactureFrame extends javax.swing.JInternalFrame {
         
         
         this.jListPatient.setListData(p);   //Chargement de la liste
+        
+        
 
     }
     /**
@@ -49,9 +64,9 @@ public class FactureFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        jTActes = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTTarif = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -60,6 +75,7 @@ public class FactureFrame extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLMessage = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -71,6 +87,11 @@ public class FactureFrame extends javax.swing.JInternalFrame {
         jLabel3.setText("Tarif");
 
         jButton1.setText("Add");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jListPatient.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -86,13 +107,13 @@ public class FactureFrame extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Actes", "Montant", "Date"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
@@ -111,17 +132,19 @@ public class FactureFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(32, 32, 32)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTTarif, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(32, 32, 32)
+                                .addComponent(jTActes, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(97, 97, 97))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -141,14 +164,16 @@ public class FactureFrame extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTActes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTTarif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1)
+                            .addComponent(jLMessage))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -158,29 +183,91 @@ public class FactureFrame extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jListPatientValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPatientValueChanged
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            
+            DossierPatient dp = (DossierPatient) this.jListPatient.getSelectedValue(); 
+            jLMessage.setText("");
+            jTActes.setText("");
+            jTTarif.setText("");
+
+            
+           
+            IDao dao = FactoryDao.getDAO("Facture");
+            res = dao.selectRetunRes(dp.getId_dossierPatient());
+            
+            try {
+                meta = res.getMetaData();
+            } catch (SQLException ex) {
+                Logger.getLogger(FactureFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            String[] tHeader = new String[meta.getColumnCount()];
+            
+            for (int i = 0; i < tHeader.length; i++) {
+                tHeader[i]= meta.getColumnName(i+1);
+            }
+            
+            res.last();
+            
+            int nbrLigne = res.getRow()-1;
+            res.first();
+            
+            Object [][] t = new Object[nbrLigne][meta.getColumnCount()];
+            
+            for (int i = 0; i < nbrLigne; i++) {
+                res.next();
+                
+                for (int j = 0; j < meta.getColumnCount(); j++) {
+                    
+                    t[i][j]= res.getString(j+1);
+                }
+  
+            this.tableModel= new DefaultTableModel(t, tHeader);
+            this.jTable1.setModel(tableModel);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FactureFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_jListPatientValueChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        DossierPatient dp = (DossierPatient) this.jListPatient.getSelectedValue(); 
+        Facture f = new Facture();
+        IDao daoA = FactoryDao.getDAO("Facture"); //Appel de la daoDossierPattient via la factory
+        java.sql.Date uDate = new java.sql.Date(1);
+       
+         f.setId_patient(dp.getId_dossierPatient());
+         f.setId_medecin(dp.getId_user());
+         f.setDate((Date) uDate);
+         f.setActes(jTActes.getText());
+         f.setMontant(jTTarif.getText());
+         daoA.insert(f);
+         jLMessage.setText("Votre actes à été insérer");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLMessage;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JList jListPatient;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTActes;
+    private javax.swing.JTextField jTTarif;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

@@ -53,7 +53,7 @@ public class DaoDossierPatient implements IDao<DossierPatient> {
             ResultSet res = stat.executeQuery(sql);
 
             while (res.next()) {
-               DossierPatient dp = new DossierPatient(res.getInt("id_dossier_patient"), res.getString("nom"), res.getString("prenom"), res.getString("sexe"), res.getString("date_de_naissance"), res.getString("nss"), res.getString("adresse"), res.getString("ville"), res.getString("zip_code"), res.getInt("id_user"));
+               DossierPatient dp = new DossierPatient(res.getInt("id_dossier_patient"), res.getString("nom"), res.getString("prenom"), res.getString("sexe"), res.getString("date_de_naissance"), res.getString("nss"), res.getString("adresse"), res.getString("ville"), res.getString("zip_code"), res.getInt("id_medecin_user"));
                 l.add(dp);
                 
             }
@@ -89,7 +89,7 @@ public class DaoDossierPatient implements IDao<DossierPatient> {
             ResultSet res = stat.executeQuery();
             res.first();
             
-            dp = new DossierPatient(res.getInt("id_dossier_patient"), res.getString("nom"),res.getString("prenom"), res.getString("sexe"),res.getString("date_de_naissance"), res.getString("nss"), res.getString("adresse"),res.getString("ville"), res.getString("zip_code"), res.getInt("id_user"));
+            dp = new DossierPatient(res.getInt("id_dossier_patient"), res.getString("nom"),res.getString("prenom"), res.getString("sexe"),res.getString("date_de_naissance"), res.getString("nss"), res.getString("adresse"),res.getString("ville"), res.getString("zip_code"), res.getInt("id_medecin_user"));
             bdd.seDeconnecter(cnx);
             
         } catch (ClassNotFoundException ex) {
@@ -110,7 +110,7 @@ public class DaoDossierPatient implements IDao<DossierPatient> {
         try {
             
             Connection cnx = bdd.seConnecter();
-            String sql = "select * from DossierPatient where id_user=?";
+            String sql = "select * from DossierPatient where id_medecin_user=?";
             PreparedStatement stat = cnx.prepareStatement(sql);
             stat.setInt(1, user.getId());
             // Statement stat = cnx.createStatement();
@@ -118,7 +118,7 @@ public class DaoDossierPatient implements IDao<DossierPatient> {
     
             while (res.next()) {
                
-               dm = new DossierPatient(res.getInt("id_dossier_patient"), res.getString("nom"), res.getString("prenom"), res.getString("sexe"), res.getString("date_de_naissance"), res.getString("nss"), res.getString("adresse"), res.getString("ville"), res.getString("zip_code"), res.getInt("id_user"));
+               dm = new DossierPatient(res.getInt("id_dossier_patient"), res.getString("nom"), res.getString("prenom"), res.getString("sexe"), res.getString("date_de_naissance"), res.getString("nss"), res.getString("adresse"), res.getString("ville"), res.getString("zip_code"), res.getInt("id_medecin_user"));
                 System.out.println(dm);
                l.add(dm);
                 
@@ -170,6 +170,11 @@ public class DaoDossierPatient implements IDao<DossierPatient> {
 
     @Override
     public List selectAllTim(Utilisateur user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ResultSet selectRetunRes(int id_dossierPatient) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

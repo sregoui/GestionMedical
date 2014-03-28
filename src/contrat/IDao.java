@@ -44,4 +44,6 @@ public interface IDao<T extends Metier> {
     public List selectAll(Utilisateur user);
 
     public List selectAllTim(Utilisateur user);
+
+    public ResultSet selectRetunRes(int id_dossierPatient);
 }

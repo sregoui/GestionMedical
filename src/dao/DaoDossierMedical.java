@@ -12,13 +12,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import metier.patient.*;
-import metier.personnel.Medecin;
 import metier.personnel.Utilisateur;
 
 
@@ -100,7 +98,7 @@ public class DaoDossierMedical implements IDao<DossierMedical> {
         try {
             
             Connection cnx = bdd.seConnecter();
-            String sql = "SELECT dm.id_dossier_medical,id_dossier_patient_dm,taille,poids,allergie,antecedants,contres_indications,vaccins FROM dossierpatient dp, dossiermedical dm WHERE id_user =? AND dp.ID_DOSSIER_PATIENT = dm.id_dossier_patient_dm";
+            String sql = "SELECT dm.id_dossier_medical,id_dossier_patient_dm,taille,poids,allergie,antecedants,contres_indications,vaccins FROM dossierpatient dp, dossiermedical dm WHERE id_medecin_user =? AND dp.ID_DOSSIER_PATIENT = dm.id_dossier_patient_dm";
             PreparedStatement stat = cnx.prepareStatement(sql);
             stat.setInt(1, user.getId());
             // Statement stat = cnx.createStatement();
@@ -164,6 +162,11 @@ public class DaoDossierMedical implements IDao<DossierMedical> {
 
     @Override
     public List selectAllTim(Utilisateur user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ResultSet selectRetunRes(int id_dossierPatient) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

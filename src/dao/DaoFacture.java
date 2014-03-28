@@ -9,6 +9,8 @@ package dao;
 import contrat.IDao;
 import static contrat.IDao.bdd;
 import java.sql.Connection;
+import java.util.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,7 +19,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import metier.facturation.*;
-import metier.personnel.Medecin;
 import metier.personnel.Utilisateur;
 
 /**
@@ -28,7 +29,25 @@ public class DaoFacture implements IDao<Facture> {
 
     @Override
     public void insert(Facture objet) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+            Connection cnx = bdd.seConnecter();
+
+            String sql = "INSERT INTO `facture`(`id_medecin_fa`, `id_dossier_patient_fa`, `montant_fa`, `actes`, `date_facture`) VALUES (?,?,?,?,?)";
+            PreparedStatement stat = cnx.prepareStatement(sql);
+            stat.setInt(1, objet.getId_medecin());
+            stat.setInt(2, objet.getId_patient());
+            stat.setString(3, objet.getMontant());
+            stat.setString(4, objet.getActes());
+            stat.setDate(5, (java.sql.Date) objet.getDate());
+
+
+            stat.executeUpdate();
+            bdd.seDeconnecter(cnx);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DaoFacture.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoFacture.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -72,7 +91,42 @@ public class DaoFacture implements IDao<Facture> {
 
     @Override
     public ResultSet selectRetunRes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ResultSet res = null;
+         Connection cnx = null;
+        try {
+             cnx = bdd.seConnecter();
+            String sql = "SELECT `actes`, `montant_fa`, `date_facture` FROM `facture`";
+            Statement stat = cnx.createStatement();
+            res = stat.executeQuery(sql);
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DaoFacture.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoFacture.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+//            bdd.seDeconnecter(cnx);
+        }
+        return res;
+    }
+    
+     public ResultSet selectRetunRes(int id) {
+        ResultSet res = null;
+         Connection cnx = null;
+        try {
+             cnx = bdd.seConnecter();
+            String sql = "SELECT `actes`, `montant_fa`, `date_facture` FROM `facture` WHERE id_medecin_fa=?";
+            PreparedStatement stat = cnx.prepareStatement(sql);
+            stat.setInt(1, id);
+            res = stat.executeQuery();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DaoFacture.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoFacture.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+//            bdd.seDeconnecter(cnx);
+        }
+        return res;
     }
 
     @Override

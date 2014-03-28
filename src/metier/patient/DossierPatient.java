@@ -131,6 +131,15 @@ public class DossierPatient extends Metier implements Serializable{
         this.zip_code = zip_code;
     }
 
+    public int getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+    
+
     @Override
     public String toString() {
         return  nom + " " + prenom ;

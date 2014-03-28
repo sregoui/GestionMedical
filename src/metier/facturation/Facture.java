@@ -9,6 +9,7 @@ package metier.facturation;
 import contrat.Metier;
 import java.io.Serializable;
 import java.sql.Date;
+import java.text.DateFormat;
 import metier.personnel.Medecin;
 
 /**
@@ -21,22 +22,30 @@ public class Facture extends Metier implements Serializable {
     private int id_patient;
     private int id_medecin;
     private String actes;
+    private String montant;
     private Date date;
 
-    public Facture(int id_facture, int id_patient, int id_medecin, String actes, Date date) {
+    public Facture() {
+    }
+
+    public Facture(int id_facture, int id_patient, int id_medecin, String actes, String montant, Date date) {
         this.id_facture = id_facture;
         this.id_patient = id_patient;
         this.id_medecin = id_medecin;
         this.actes = actes;
+        this.montant = montant;
         this.date = date;
     }
 
-    public Facture(int id_patient, int id_medecin, String actes, Date date) {
+    public Facture(int id_patient, int id_medecin, String actes, String montant, Date date) {
         this.id_patient = id_patient;
         this.id_medecin = id_medecin;
         this.actes = actes;
+        this.montant = montant;
         this.date = date;
     }
+
+
 
     public int getId_facture() {
         return id_facture;
@@ -78,9 +87,18 @@ public class Facture extends Metier implements Serializable {
         this.date = date;
     }
 
+    public String getMontant() {
+        return montant;
+    }
+
+    public void setMontant(String montant) {
+        this.montant = montant;
+    }
+
     @Override
     public String toString() {
         return "Facture{" + "id_facture=" + id_facture + ", id_patient=" + id_patient + ", id_medecin=" + id_medecin + ", actes=" + actes + ", date=" + date + '}';
     }
+
     
 }
