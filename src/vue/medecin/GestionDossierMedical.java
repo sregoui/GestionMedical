@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Vector;
 import metier.patient.DossierMedical;
 import metier.patient.DossierPatient;
+import metier.personnel.Medecin;
 import metier.personnel.Utilisateur;
 
 /**
@@ -20,7 +21,7 @@ import metier.personnel.Utilisateur;
  */
 public final class GestionDossierMedical extends javax.swing.JInternalFrame {
 
-    private Utilisateur user; //Reutilisation des infos user
+    private Medecin medecin; //Reutilisation des infos user
     private Vector p; 
     private DossierPatient dp; 
     private DossierMedical dm;
@@ -28,17 +29,17 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
     /**
      * Creates new form GestionDossierMedical
      */
-    public GestionDossierMedical(Utilisateur user) {
+    public GestionDossierMedical(Medecin m) {
         initComponents();
-        initListPatient(user); //Permet l'affichage de la liste
+        initListPatient(m); //Permet l'affichage de la liste
         this.setVisible(true);
     }
     
-    public void initListPatient(Utilisateur user){
+    public void initListPatient(Medecin m){
         this.jListPatient.clearSelection();
         //Reccuperation de l'ensemble des dossier Medicaux selon l'id de l'user
         IDao dao = FactoryDao.getDAO("DossierMedical");
-        p = new Vector<>(dao.selectAll(user));
+        p = new Vector<>(dao.selectAll(m));
         
         this.jListPatient.setListData(p);   //Chargement de la liste
 
