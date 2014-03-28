@@ -79,12 +79,6 @@ public class DaoMedecin implements IDao<Medecin> {
     }
 
     @Override
-    public List<Medecin> selectAllbyMedecin() {
-        return null;
-
-    }
-
-    @Override
     public List selectAll(Utilisateur user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -124,10 +118,6 @@ public class DaoMedecin implements IDao<Medecin> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Medecin> selectAllbyMedecinTim() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public List selectAllTim(Utilisateur user) {

@@ -54,10 +54,6 @@ public class DaoPaiement implements IDao<Paiement> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Paiement> selectAllbyMedecin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public List selectAll(Utilisateur user) {
@@ -99,10 +95,6 @@ public class DaoPaiement implements IDao<Paiement> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Paiement> selectAllbyMedecinTim() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public List selectAllTim(Utilisateur user) {

@@ -30,7 +30,7 @@ public interface IDao<T extends Metier> {
     public void update(T objet);
     public ResultSet selectRetunRes();
     public T selectById(int id);
-    public List<T> selectAllbyMedecin();
+
 
     public void insertTim(T objet);
     public void insertFromListTim(List l);
@@ -39,7 +39,7 @@ public interface IDao<T extends Metier> {
     public void updateTim(T objet);
     public ResultSet selectRetunResTim();
     public T selectByIdTim(int id);
-    public List<T> selectAllbyMedecinTim();
+
 
     public List selectAll(Utilisateur user);
 

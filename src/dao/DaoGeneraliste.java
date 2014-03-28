@@ -78,11 +78,6 @@ public class DaoGeneraliste implements IDao<Generaliste> {
     }
 
     @Override
-    public List<Generaliste> selectAllbyMedecin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List selectAll(Utilisateur user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -119,11 +114,6 @@ public class DaoGeneraliste implements IDao<Generaliste> {
 
     @Override
     public Generaliste selectByIdTim(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Generaliste> selectAllbyMedecinTim() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

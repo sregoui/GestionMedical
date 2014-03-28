@@ -53,11 +53,6 @@ public class DaoSecretaire implements IDao<Secretaire> {
     }
 
     @Override
-    public List<Secretaire> selectAllbyMedecin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List selectAll(Utilisateur user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -97,10 +92,6 @@ public class DaoSecretaire implements IDao<Secretaire> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Secretaire> selectAllbyMedecinTim() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public List selectAllTim(Utilisateur user) {

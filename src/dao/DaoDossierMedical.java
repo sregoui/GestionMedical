@@ -79,33 +79,7 @@ public class DaoDossierMedical implements IDao<DossierMedical> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /**
-     * Methode qui reccupere la liste des dossierMedical par Medecin
-     * @return List
-     */
-    @Override
-    public List<DossierMedical> selectAllbyMedecin() {
-         List<DossierMedical> l = new ArrayList<>();
-        try {
-            Connection cnx = bdd.seConnecter();
-            String sql = "select * from DossierMedical";
-            Statement stat = cnx.createStatement();
-            ResultSet res = stat.executeQuery(sql);
-
-            while (res.next()) {
-               DossierMedical dm = new DossierMedical(res.getInt("id_dossier_medical"), res.getInt("id_dossier_patient_dm"), res.getString("taille"), res.getString("poids"), res.getString("allergie"), res.getString("antecedants"), res.getString("contres_indications"), res.getString("vaccins"));
-                l.add(dm);
-                
-            }
-            bdd.seDeconnecter(cnx);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DaoUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DaoUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return l;
-       
-    }
+  
 
     @Override
     public List<DossierMedical> selectAll() {
@@ -187,10 +161,6 @@ public class DaoDossierMedical implements IDao<DossierMedical> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<DossierMedical> selectAllbyMedecinTim() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public List selectAllTim(Utilisateur user) {

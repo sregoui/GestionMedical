@@ -53,11 +53,6 @@ public class DaoStatistique implements IDao<Statistique> {
     }
 
     @Override
-    public List<Statistique> selectAllbyMedecin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List selectAll(Utilisateur user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -94,11 +89,6 @@ public class DaoStatistique implements IDao<Statistique> {
 
     @Override
     public Statistique selectByIdTim(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Statistique> selectAllbyMedecinTim() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
