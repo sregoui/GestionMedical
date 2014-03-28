@@ -25,12 +25,11 @@ public class DossierPatient extends Metier implements Serializable{
     private String ville;
     private String zip_code;
     private int id_user;
-    private int id_role;
 
     public DossierPatient() {
     }
 
-    public DossierPatient(int id_dossierPatient, String nom, String prenom, String sexe, String date_de_naissance, String nss, String adresse, String ville, String zip_code, int id_user, int id_role) {
+    public DossierPatient(int id_dossierPatient, String nom, String prenom, String sexe, String date_de_naissance, String nss, String adresse, String ville, String zip_code, int id_user) {
         this.id_dossierPatient = id_dossierPatient;
         this.nom = nom;
         this.prenom = prenom;
@@ -41,10 +40,10 @@ public class DossierPatient extends Metier implements Serializable{
         this.ville = ville;
         this.zip_code = zip_code;
         this.id_user = id_user;
-        this.id_role = id_role;
+
     }
 
-    public DossierPatient(String nom, String prenom, String sexe, String date_de_naissance, String nss, String adresse, String ville, String zip_code, int id_user, int id_role) {
+    public DossierPatient(String nom, String prenom, String sexe, String date_de_naissance, String nss, String adresse, String ville, String zip_code, int id_user) {
         this.nom = nom;
         this.prenom = prenom;
         this.sexe = sexe;
@@ -54,7 +53,7 @@ public class DossierPatient extends Metier implements Serializable{
         this.ville = ville;
         this.zip_code = zip_code;
         this.id_user = id_user;
-        this.id_role = id_role;
+
     }
    
     

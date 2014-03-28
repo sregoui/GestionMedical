@@ -93,7 +93,7 @@ public class DaoDossierMedical implements IDao<DossierMedical> {
             ResultSet res = stat.executeQuery(sql);
 
             while (res.next()) {
-               DossierMedical dm = new DossierMedical(res.getInt("id_dossier_medical"), res.getInt("id_dossier_patient_dm"), res.getString("taille"), res.getString("poids"), res.getString("allergie"), res.getString("antecedants"), res.getString("contres_indications"), res.getString("vaccins"), res.getInt("id_user"));
+               DossierMedical dm = new DossierMedical(res.getInt("id_dossier_medical"), res.getInt("id_dossier_patient_dm"), res.getString("taille"), res.getString("poids"), res.getString("allergie"), res.getString("antecedants"), res.getString("contres_indications"), res.getString("vaccins"));
                 l.add(dm);
                 
             }
@@ -126,7 +126,7 @@ public class DaoDossierMedical implements IDao<DossierMedical> {
         try {
             
             Connection cnx = bdd.seConnecter();
-            String sql = "select * from DossierMedical where id_user=?";
+            String sql = "SELECT dm.id_dossier_medical,id_dossier_patient_dm,taille,poids,allergie,antecedants,contres_indications,vaccins FROM dossierpatient dp, dossiermedical dm WHERE id_user =? AND dp.ID_DOSSIER_PATIENT = dm.id_dossier_patient_dm";
             PreparedStatement stat = cnx.prepareStatement(sql);
             stat.setInt(1, user.getId());
             // Statement stat = cnx.createStatement();
@@ -135,7 +135,7 @@ public class DaoDossierMedical implements IDao<DossierMedical> {
     
             while (res.next()) {
                
-               dm = new DossierMedical(res.getInt("id_dossier_medical"), res.getInt("id_dossier_patient_dm"), res.getString("taille"), res.getString("poids"), res.getString("allergie"), res.getString("antecedants"), res.getString("contres_indications"), res.getString("vaccins"), res.getInt("id_user"));
+               dm = new DossierMedical(res.getInt("id_dossier_medical"), res.getInt("id_dossier_patient_dm"), res.getString("taille"), res.getString("poids"), res.getString("allergie"), res.getString("antecedants"), res.getString("contres_indications"), res.getString("vaccins"));
                
                l.add(dm);
                 

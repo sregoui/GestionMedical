@@ -64,7 +64,4 @@ public class Medecin extends Utilisateur {
     public String toString() {
         return "Medecin{" + "dossierMedical=" + dossierMedical + ", facture=" + facture + ", rdz=" + rdz + '}';
     }
-    
-    
-
 }
