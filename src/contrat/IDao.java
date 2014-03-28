@@ -31,5 +31,16 @@ public interface IDao<T extends Metier> {
     public T selectById(int id);
     public List<T> selectAllbyMedecin();
 
+    public void insertTim(T objet);
+    public void insertFromListTim(List l);
+    public void deleteTim(T objet);
+    public List<T> selectAllTim();
+    public void updateTim(T objet);
+    public ResultSet selectRetunResTim();
+    public T selectByIdTim(int id);
+    public List<T> selectAllbyMedecinTim();
+
     public List selectAll(Utilisateur user);
+
+    public List selectAllTim(Utilisateur user);
 }
