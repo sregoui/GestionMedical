@@ -473,6 +473,7 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables
+
 private GestionDossierMedical internalFrameGestionMedical;
 private FrameGenerique internalFrameMedicament;
 private VoirDocument internalVoirDocument;

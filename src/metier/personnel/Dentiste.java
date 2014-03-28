@@ -6,6 +6,11 @@
 
 package metier.personnel;
 
+import java.util.Collection;
+import metier.facturation.Facture;
+import metier.gestionRdz.Rdz;
+import metier.patient.DossierPatient;
+
 
 
 /**
@@ -19,5 +24,7 @@ public class Dentiste extends Medecin {
     }
 
 
+
     
+  
 }

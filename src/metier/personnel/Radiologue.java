@@ -7,6 +7,10 @@
 package metier.personnel;
 
 import contrat.Metier;
+import java.util.Collection;
+import metier.facturation.Facture;
+import metier.gestionRdz.Rdz;
+import metier.patient.DossierPatient;
 
 /**
  *
@@ -19,5 +23,6 @@ public class Radiologue extends Medecin {
     }
 
 
-    
+
+ 
 }

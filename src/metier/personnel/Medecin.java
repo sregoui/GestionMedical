@@ -7,17 +7,33 @@
 package metier.personnel;
 
 import contrat.Metier;
+import java.util.List;
+import metier.facturation.Facture;
+import metier.gestionRdz.Rdz;
+import metier.patient.DossierMedical;
+import metier.patient.DossierPatient;
 
 /**
  *
  * @author Samia
  */
 public class Medecin extends Utilisateur {
+    protected List<DossierMedical> dossierMedical;
+    protected List<Facture> facture;
+    protected List<Rdz> rdz;
 
     public Medecin(int id, String login, String password, int id_role, String nom, String prenom, String email, String telPort, String telFixe) {
         super(id, login, password, id_role, nom, prenom, email, telPort, telFixe);
     }
 
+    public Medecin(List<DossierMedical> dossierMedical, List<Facture> facture, List<Rdz> rdz) {
+        this.dossierMedical = dossierMedical;
+        this.facture = facture;
+        this.rdz = rdz;
+    }
 
-    
+    public Medecin(List<DossierMedical> dossierMedical) {
+        this.dossierMedical = dossierMedical;
+    }
+
 }

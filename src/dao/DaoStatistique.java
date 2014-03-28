@@ -106,5 +106,5 @@ public class DaoStatistique implements IDao<Statistique> {
     public List selectAllTim(Utilisateur user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

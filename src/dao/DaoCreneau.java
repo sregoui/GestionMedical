@@ -10,6 +10,7 @@ import contrat.IDao;
 import java.sql.ResultSet;
 import java.util.List;
 import metier.gestionRdz.*;
+import metier.personnel.Medecin;
 import metier.personnel.Utilisateur;
 
 /**
@@ -53,10 +54,6 @@ public class DaoCreneau implements IDao<Creneau> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Creneau> selectAllbyMedecin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public List selectAll(Utilisateur user) {
@@ -107,5 +104,11 @@ public class DaoCreneau implements IDao<Creneau> {
     public List selectAllTim(Utilisateur user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<Creneau> selectAllbyMedecin() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 }

@@ -32,6 +32,10 @@ public class Utilisateur extends Metier implements Serializable {
    private String telPort;
    private String telFixe;
 
+    public Utilisateur() {
+    }
+
+   
    /**
     * 
     * @param id

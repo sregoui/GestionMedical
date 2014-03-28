@@ -10,6 +10,7 @@ import contrat.IDao;
 import java.sql.ResultSet;
 import java.util.List;
 import metier.patient.*;
+import metier.personnel.Medecin;
 import metier.personnel.Utilisateur;
 
 /**
@@ -53,10 +54,6 @@ public class DaoDocument implements IDao<Document> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Document> selectAllbyMedecin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public List selectAll(Utilisateur user) {
@@ -107,5 +104,11 @@ public class DaoDocument implements IDao<Document> {
     public List selectAllTim(Utilisateur user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<Document> selectAllbyMedecin() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 }

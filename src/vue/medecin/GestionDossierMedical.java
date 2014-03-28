@@ -39,7 +39,8 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
         this.jListPatient.clearSelection();
         //Reccuperation de l'ensemble des dossier Medicaux selon l'id de l'user
         IDao dao = FactoryDao.getDAO("DossierMedical");
-        p = new Vector<>(dao.selectAll(m));
+        p = new Vector<>(dao.selectAll(m)); 
+        
         
         this.jListPatient.setListData(p);   //Chargement de la liste
 
@@ -328,7 +329,7 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
 
     private void jListPatientValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPatientValueChanged
         // TODO add your handling code here:
-
+         
         DossierMedical dm = (DossierMedical) this.jListPatient.getSelectedValue(); //Reccupération de la valeur de l'élément séléctionner
         IDao daoA = FactoryDao.getDAO("DossierPatient"); //Appel de la daoDossierPattient via la factory
         

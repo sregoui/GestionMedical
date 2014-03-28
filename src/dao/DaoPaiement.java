@@ -10,6 +10,7 @@ import contrat.IDao;
 import java.sql.ResultSet;
 import java.util.List;
 import metier.facturation.*;
+import metier.personnel.Medecin;
 import metier.personnel.Utilisateur;
 
 /**
@@ -107,5 +108,6 @@ public class DaoPaiement implements IDao<Paiement> {
     public List selectAllTim(Utilisateur user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     
 }

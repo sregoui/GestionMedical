@@ -9,6 +9,7 @@ package dao;
 import contrat.IDao;
 import static contrat.IDao.bdd;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import metier.patient.DossierMedical;
 import metier.personnel.*;
 
 /**
@@ -42,6 +44,7 @@ public class DaoMedecin implements IDao<Medecin> {
     @Override
     public List<Medecin> selectAll() {
          List<Medecin> l = new ArrayList<>();
+         
         try {
             Connection cnx = bdd.seConnecter();
             String sql = "select * from user where id_role >=3";
@@ -79,7 +82,8 @@ public class DaoMedecin implements IDao<Medecin> {
 
     @Override
     public List<Medecin> selectAllbyMedecin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
+
     }
 
     @Override

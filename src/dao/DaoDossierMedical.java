@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import metier.patient.*;
+import metier.personnel.Medecin;
 import metier.personnel.Utilisateur;
 
 
@@ -135,6 +136,7 @@ public class DaoDossierMedical implements IDao<DossierMedical> {
             while (res.next()) {
                
                dm = new DossierMedical(res.getInt("id_dossier_medical"), res.getInt("id_dossier_patient_dm"), res.getString("taille"), res.getString("poids"), res.getString("allergie"), res.getString("antecedants"), res.getString("contres_indications"), res.getString("vaccins"), res.getInt("id_user"));
+               
                l.add(dm);
                 
             }

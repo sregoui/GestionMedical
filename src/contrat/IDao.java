@@ -10,6 +10,7 @@ package contrat;
 import dao.bdd;
 import java.sql.ResultSet;
 import java.util.List;
+import metier.personnel.Medecin;
 import metier.personnel.Utilisateur;
 
 /**
