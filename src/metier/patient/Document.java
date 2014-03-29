@@ -61,7 +61,7 @@ public class Document extends Metier implements Serializable {
 
     @Override
     public String toString() {
-        return "Document{" + "id_document=" + id_document + ", id_type_document=" + id_type_document + ", libelle=" + libelle + '}';
+        return  libelle ;
     }
     
     

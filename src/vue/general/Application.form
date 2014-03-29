@@ -210,9 +210,6 @@
             <Component class="javax.swing.JLabel" name="jLmessage">
             </Component>
             <Component class="javax.swing.JPasswordField" name="jTpassword">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jPasswordField1"/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>

@@ -22,6 +22,7 @@ public class GestionDocument extends javax.swing.JInternalFrame {
      */
     public GestionDocument() {
         initComponents();
+         initList();
         this.setVisible(true);
     }
 

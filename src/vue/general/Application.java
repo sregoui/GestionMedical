@@ -106,8 +106,6 @@ public class Application extends javax.swing.JFrame {
             }
         });
 
-        jTpassword.setText("jPasswordField1");
-
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
