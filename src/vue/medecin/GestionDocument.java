@@ -6,6 +6,8 @@
 
 package vue.medecin;
 
+
+import XML.UserParser;
 import dao.DaoDocument;
 import java.awt.print.PrinterException;
 import java.beans.XMLEncoder;
@@ -22,7 +24,11 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import metier.patient.Document;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -159,7 +165,26 @@ public class GestionDocument extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
+        try {   
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            SAXParser parser = factory.newSAXParser();
+            
+           
+            UserParser userParser = new UserParser();
+            try {
+                //condition sur le fichier
+                parser.parse("user.xml", userParser);
+            } catch (IOException ex) {
+                Logger.getLogger(GestionDocument.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(GestionDocument.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(GestionDocument.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            
+ 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
