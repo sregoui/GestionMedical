@@ -7,8 +7,21 @@
 package vue.medecin;
 
 import dao.DaoDocument;
+import java.awt.print.PrinterException;
+import java.beans.XMLEncoder;
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import metier.patient.Document;
 
 /**
@@ -16,6 +29,7 @@ import metier.patient.Document;
  * @author SAMIA HOME
  */
 public class GestionDocument extends javax.swing.JInternalFrame {
+    private String yourFile;
 
     /**
      * Creates new form CreerDocument
@@ -76,8 +90,18 @@ public class GestionDocument extends javax.swing.JInternalFrame {
         jLabel1.setText("Document Type");
 
         jButton1.setText("Imprimer");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Sauvegarder");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -137,6 +161,50 @@ public class GestionDocument extends javax.swing.JInternalFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        //Permet d'imprimer le document
+        try {
+            // TODO add your handling code here:
+            jTextArea1.print();
+        } catch (PrinterException ex) {
+            Logger.getLogger(GestionDocument.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser saver = new JFileChooser("./");  
+      //  saver.setFileFilter(new Text_Filter());  
+        int returnVal = saver.showSaveDialog(this);  
+        File file = saver.getSelectedFile();  
+        BufferedWriter writer = null;  
+        if (returnVal == JFileChooser.APPROVE_OPTION)  
+        {  
+            try  
+            {  
+            writer = new BufferedWriter( new FileWriter( file.getName()+".txt"));  
+            writer.write(jTextArea1.getText());  
+            writer.close( );  
+            JOptionPane.showMessageDialog(this, "Le document à été sauvegarder!",  
+                        "Success!", JOptionPane.INFORMATION_MESSAGE);  
+            }  
+            catch (IOException e)  
+            {  
+            JOptionPane.showMessageDialog(this, "Echec lors de la sauvegarde!",  
+                        "Error!", JOptionPane.INFORMATION_MESSAGE);  
+            }  
+        }  
+        
+        
+//        
+//try (BufferedWriter fileOut = new BufferedWriter(new FileWriter("Sam.doc"))) {
+//    jTextArea1.write(fileOut);
+//}       catch (IOException ex) {
+//            Logger.getLogger(GestionDocument.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
      private  DefaultComboBoxModel dcmDor= new DefaultComboBoxModel();
 
