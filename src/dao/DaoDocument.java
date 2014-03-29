@@ -7,8 +7,15 @@
 package dao;
 
 import contrat.IDao;
+import static contrat.IDao.bdd;
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import metier.patient.*;
 import metier.personnel.Medecin;
 import metier.personnel.Utilisateur;
@@ -59,6 +66,29 @@ public class DaoDocument implements IDao<Document> {
     public List selectAll(Utilisateur user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public List selectAllTypeDoc() {
+             List<Document> l = new ArrayList<>();
+         
+        try {
+            Connection cnx = bdd.seConnecter();
+            String sql = "select * from type";
+            Statement stat = cnx.createStatement();
+            ResultSet res = stat.executeQuery(sql);
+
+            while (res.next()) {
+               Document t = new Document(res.getInt("id_type"), res.getString("libelle"));
+                l.add(t);
+            }
+
+            bdd.seDeconnecter(cnx);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DaoUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return l;
+    }
 
     @Override
     public void insertTim(Document objet) {
@@ -102,6 +132,11 @@ public class DaoDocument implements IDao<Document> {
 
     @Override
     public ResultSet selectRetunRes(int id_dossierPatient) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ResultSet selectRetunRes2(int id_dossierPatient) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

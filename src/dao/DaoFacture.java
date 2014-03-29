@@ -114,7 +114,7 @@ public class DaoFacture implements IDao<Facture> {
          Connection cnx = null;
         try {
              cnx = bdd.seConnecter();
-            String sql = "SELECT `actes`, `montant_fa`, `date_facture` FROM `facture` WHERE id_medecin_fa=?";
+            String sql = "SELECT `actes`, `montant_fa`, `date_facture` FROM `facture` WHERE id_dossier_patient_fa=?";
             PreparedStatement stat = cnx.prepareStatement(sql);
             stat.setInt(1, id);
             res = stat.executeQuery();
@@ -128,6 +128,26 @@ public class DaoFacture implements IDao<Facture> {
         }
         return res;
     }
+     
+      public ResultSet selectRetunRes2(int id) {
+        ResultSet res = null;
+         Connection cnx = null;
+        try {
+             cnx = bdd.seConnecter();
+            String sql = "SELECT `actes`, `date_facture` FROM `facture` WHERE id_dossier_patient_fa=?";
+            PreparedStatement stat = cnx.prepareStatement(sql);
+            stat.setInt(1, id);
+            res = stat.executeQuery();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DaoFacture.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoFacture.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+//            bdd.seDeconnecter(cnx);
+        }
+        return res;
+    } 
 
     @Override
     public Facture selectById(int id) {

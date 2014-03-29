@@ -6,20 +6,39 @@
 
 package vue.medecin;
 
+import dao.DaoDocument;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import metier.patient.Document;
+
 /**
  *
  * @author SAMIA HOME
  */
-public class VoirDocument extends javax.swing.JInternalFrame {
+public class GestionDocument extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CreerDocument
      */
-    public VoirDocument() {
+    public GestionDocument() {
         initComponents();
         this.setVisible(true);
     }
 
+        public void initList(){
+        
+     DaoDocument daoA = new DaoDocument();
+     List lDoc = daoA.selectAllTypeDoc();  
+
+      for(Object o: lDoc){
+            Document doc = (Document) o;
+            this.dcmDor.addElement(doc);          
+        }          
+       
+     this.jComboBox1.setModel(dcmDor);
+
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,6 +66,11 @@ public class VoirDocument extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Document Type");
 
@@ -109,6 +133,11 @@ public class VoirDocument extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+     private  DefaultComboBoxModel dcmDor= new DefaultComboBoxModel();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

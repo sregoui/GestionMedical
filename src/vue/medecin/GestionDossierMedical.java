@@ -8,8 +8,14 @@ package vue.medecin;
 
 import contrat.IDao;
 import factory.FactoryDao;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import metier.patient.DossierMedical;
 import metier.patient.DossierPatient;
 import metier.personnel.Medecin;
@@ -25,6 +31,9 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
     private Vector p; 
     private DossierPatient dp; 
     private DossierMedical dm;
+    private DefaultTableModel tableModel;
+    private ResultSet res;
+    private ResultSetMetaData meta;
     
     /**
      * Creates new form GestionDossierMedical
@@ -351,6 +360,50 @@ public final class GestionDossierMedical extends javax.swing.JInternalFrame {
         this.jTAntécédents.setText(dm.getAntecedants());  
         this.jTContreI.setText(dm.getContres_indications());
         this.jTVaccins.setText(dm.getVaccins());
+        
+        try{
+         //Appel du daoFacture pour afficher les factures par dossierPatient
+            IDao dao = FactoryDao.getDAO("Facture");
+            res = dao.selectRetunRes2(dp.getId_dossierPatient());
+           
+            //Modele du tableau à vide
+            this.tableModel= new DefaultTableModel();
+            this.jTHistorique.setModel(tableModel);
+            
+            //si le resultat n'est pas vide renvoi vrai
+            if(res.next()) {
+             //Generation du tableau de facture   
+            meta = res.getMetaData();
+
+            String[] tHeader = new String[meta.getColumnCount()];
+            
+            for (int i = 0; i < tHeader.length; i++) {
+                tHeader[i]= meta.getColumnName(i+1);
+            }
+            
+            res.last();
+            
+            int nbrLigne = res.getRow()-1;
+            res.first();
+            
+            Object [][] t = new Object[nbrLigne][meta.getColumnCount()];
+            
+            for (int i = 0; i < nbrLigne; i++) {
+                res.next();
+                
+                for (int j = 0; j < meta.getColumnCount(); j++) {
+                    
+                    t[i][j]= res.getString(j+1);
+                }
+  
+            this.tableModel= new DefaultTableModel(t, tHeader);
+            this.jTHistorique.setModel(tableModel);
+            }
+            
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FactureFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_jListPatientValueChanged
 

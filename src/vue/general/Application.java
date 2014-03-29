@@ -22,7 +22,7 @@ import metier.personnel.Utilisateur;
 import vue.medecin.FactureFrame;
 import vue.medecin.FrameGenerique;
 import vue.medecin.GestionDossierMedical;
-import vue.medecin.VoirDocument;
+import vue.medecin.GestionDocument;
 
 /**
  *
@@ -68,9 +68,9 @@ public class Application extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTUser = new javax.swing.JTextField();
-        jTpassword = new javax.swing.JTextField();
         jBconnection = new javax.swing.JButton();
         jLmessage = new javax.swing.JLabel();
+        jTpassword = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -99,14 +99,14 @@ public class Application extends javax.swing.JFrame {
 
         jLabel2.setText("password");
 
-        jTpassword.setToolTipText("");
-
         jBconnection.setText("Se Connecter");
         jBconnection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBconnectionActionPerformed(evt);
             }
         });
+
+        jTpassword.setText("jPasswordField1");
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
@@ -128,8 +128,9 @@ public class Application extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jTUser, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                                    .addComponent(jTpassword))))))
-                .addContainerGap(42, Short.MAX_VALUE))
+                                    .addComponent(jTpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)))))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,14 +140,14 @@ public class Application extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jTUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(14, 14, 14)
                 .addComponent(jBconnection)
                 .addGap(13, 13, 13)
                 .addComponent(jLmessage)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         desktopPane.add(jInternalFrame1);
@@ -386,7 +387,7 @@ public class Application extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         //On va reccuperer l'InternalFrame VoirDocument lors du clic
-        this.internalVoirDocument = new VoirDocument();
+        this.internalVoirDocument = new GestionDocument();
         this.desktopPane.add(this.internalVoirDocument);
         internalVoirDocument.setTitle("Gestion des Document");
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -467,7 +468,7 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLmessage;
     private javax.swing.JTextField jTUser;
-    private javax.swing.JTextField jTpassword;
+    private javax.swing.JPasswordField jTpassword;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem saveAsMenuItem;
@@ -476,6 +477,6 @@ public class Application extends javax.swing.JFrame {
 
 private GestionDossierMedical internalFrameGestionMedical;
 private FrameGenerique internalFrameMedicament;
-private VoirDocument internalVoirDocument;
+private GestionDocument internalVoirDocument;
 private FactureFrame internalFacture;
 }

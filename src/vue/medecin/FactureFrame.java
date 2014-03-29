@@ -191,24 +191,27 @@ public class FactureFrame extends javax.swing.JInternalFrame {
 
     private void jListPatientValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPatientValueChanged
         try {
-            // TODO add your handling code here:
+            // TODO: Revoir pourquoi il manque une ligne
             
             DossierPatient dp = (DossierPatient) this.jListPatient.getSelectedValue(); 
+            //lors d'une selection d'un élémeent remet les champs à vide
             jLMessage.setText("");
             jTActes.setText("");
             jTTarif.setText("");
-
             
-           
+            //Appel du daoFacture pour afficher les factures par dossierPatient
             IDao dao = FactoryDao.getDAO("Facture");
-            res = dao.selectRetunRes(dp.getId_dossierPatient());
+            res = dao.selectRetunRes2(dp.getId_dossierPatient());
+           
+            //Modele du tableau à vide
+            this.tableModel= new DefaultTableModel();
+            this.jTable1.setModel(tableModel);
             
-            try {
-                meta = res.getMetaData();
-            } catch (SQLException ex) {
-                Logger.getLogger(FactureFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+            //si le resultat n'est pas vide renvoi vrai
+            if(res.next()) {
+             //Generation du tableau de facture   
+            meta = res.getMetaData();
+
             String[] tHeader = new String[meta.getColumnCount()];
             
             for (int i = 0; i < tHeader.length; i++) {
@@ -232,6 +235,8 @@ public class FactureFrame extends javax.swing.JInternalFrame {
   
             this.tableModel= new DefaultTableModel(t, tHeader);
             this.jTable1.setModel(tableModel);
+            }
+            
             }
         } catch (SQLException ex) {
             Logger.getLogger(FactureFrame.class.getName()).log(Level.SEVERE, null, ex);
