@@ -50,16 +50,13 @@ public class UserParser extends DefaultHandler{
          case "email":
           this.user.setEmail(this.valeur);
          break;
-         case "password":
-          this.user.setPassword(this.valeur);
-         break;
          case "telephoneFixe":
           this.user.setTelFixe(this.valeur);
          break;
          case "telephonePort":
           this.user.setTelPort(this.valeur);
          break;
-        case "user":
+        case "utilisateur":
         break;
         default:
             break;
@@ -71,7 +68,7 @@ public class UserParser extends DefaultHandler{
         super.startElement(string, string1, string2, atrbts); //To change body of generated methods, choose Tools | Templates.        
         
         switch (string2){
-        case "user":
+        case "utilisateur":
         this.user = new Utilisateur();
         break;
     

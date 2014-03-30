@@ -7,7 +7,9 @@
 package dao;
 
 import contrat.IDao;
+import static contrat.IDao.bdd;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import metier.patient.DossierPatient;
 import metier.personnel.Medecin;
 import metier.personnel.Utilisateur;
 
@@ -77,7 +80,25 @@ public class DaoUtilisateur implements IDao<Utilisateur> {
 
     @Override
     public Utilisateur selectById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       Utilisateur u = null;
+        try {
+            Connection cnx= bdd.seConnecter();
+            
+            String sql = "select * from user where id_user=?";
+            PreparedStatement stat = cnx.prepareStatement(sql);
+            stat.setInt(1, id);
+            ResultSet res = stat.executeQuery();
+            res.first();
+            
+            u = new Utilisateur(res.getInt("id_user"), res.getString("login_user"), res.getString("pwd_user"), res.getInt("id_role_user"), res.getString("nom"), res.getString("prenom"), res.getString("email"), res.getString("tel_Por"), res.getString("tel_Fixe"));
+            bdd.seDeconnecter(cnx);
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DossierPatient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DossierPatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return u;
     }
 
  

@@ -8,7 +8,9 @@ package vue.medecin;
 
 
 import XML.UserParser;
+import contrat.IDao;
 import dao.DaoDocument;
+import factory.FactoryDao;
 import java.awt.print.PrinterException;
 import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
@@ -28,6 +30,11 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import metier.patient.Document;
+import metier.personnel.Utilisateur;
+import org.jdom2.Element;
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 import org.xml.sax.SAXException;
 
 /**
@@ -35,7 +42,6 @@ import org.xml.sax.SAXException;
  * @author SAMIA HOME
  */
 public class GestionDocument extends javax.swing.JInternalFrame {
-    private String yourFile;
 
     /**
      * Creates new form CreerDocument
@@ -165,26 +171,21 @@ public class GestionDocument extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        try {   
+        try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser parser = factory.newSAXParser();
             
-           
             UserParser userParser = new UserParser();
-            try {
-                //condition sur le fichier
-                parser.parse("user.xml", userParser);
-            } catch (IOException ex) {
-                Logger.getLogger(GestionDocument.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(GestionDocument.class.getName()).log(Level.SEVERE, null, ex);
+            
+            parser.parse("infos.xml", userParser);
+            
         } catch (SAXException ex) {
             Logger.getLogger(GestionDocument.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GestionDocument.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(GestionDocument.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-            
- 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

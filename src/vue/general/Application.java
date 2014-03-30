@@ -8,6 +8,8 @@ package vue.general;
 
 import contrat.IDao;
 import factory.FactoryDao;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,6 +21,10 @@ import metier.personnel.Medecin;
 import metier.personnel.Radiologue;
 import metier.personnel.Secretaire;
 import metier.personnel.Utilisateur;
+import org.jdom2.Element;
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 import vue.medecin.FactureFrame;
 import vue.medecin.FrameGenerique;
 import vue.medecin.GestionDossierMedical;
@@ -39,6 +45,8 @@ public class Application extends javax.swing.JFrame {
     private Radiologue r;
     private Secretaire s;
     private Admin a;
+    private static IDao dao;
+    private static List l;
 
     /**
      * Creates new form Application
@@ -372,6 +380,75 @@ public class Application extends javax.swing.JFrame {
                 jLmessage.setText("Authentification ratée");
             }
         }
+        
+                
+        try {         
+         // --- Partie 1 : Creation du DOM en memoire
+         org.jdom2.Document arbreDom = new org.jdom2.Document(new Element("racine"));
+
+         // --- Partie 2 : fermeture ou Output (dom2fichier)
+         // --- Ecriture sur le DD dans le document XML
+         // --- du contenu de l'arbre DOM qui est en RAM        
+         
+                  // --- Les variables
+         String lsFichier  = "infos.xml";
+         SAXBuilder sxb    = new SAXBuilder();
+         Element racine    = new Element("Contact");
+
+
+         XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+         sortie.output(arbreDom, new FileOutputStream(lsFichier));
+         
+         arbreDom = sxb.build(new File(lsFichier));
+         
+         // --- Recuperation de l'element racine
+         racine = arbreDom.getRootElement();
+         
+
+         dao = FactoryDao.getDAO("Utilisateur");
+         Utilisateur user = (Utilisateur) dao.selectById(u.getId());
+
+            
+         Element userBalise = new Element("utilisateur");
+         userBalise.setAttribute("id", String.valueOf(user.getId()));
+            
+         Element nom           = new Element("nom");
+         nom.setText(user.getNom());
+         Element prenom          = new Element("prenom");
+         prenom.setText(user.getPrenom());
+         Element tel_port         = new Element("tel_port");
+         tel_port.setText(user.getTelPort());
+         Element tel_fixe          = new Element("tel_fixe");
+         tel_fixe.setText(user.getTelFixe());
+         Element email          = new Element("email");
+         email.setText(user.getEmail());
+         
+         userBalise.addContent(nom);
+         userBalise.addContent(prenom);
+         userBalise.addContent(tel_port);
+         userBalise.addContent(tel_fixe);
+         userBalise.addContent(email);
+         racine.addContent(userBalise);
+            
+
+
+         // --- Partie 3 : fermeture ou Output (dom2fichier)
+         // --- Ecriture sur le DD dans le document XML
+         // --- du contenu de l'arbre DOM qui est en RAM
+         XMLOutputter sortie2 = new XMLOutputter(Format.getPrettyFormat());
+         sortie.output(arbreDom, new FileOutputStream(lsFichier));
+
+         System.out.println("Article ajouté");
+
+      } // FIN TRY
+
+      catch (Exception e) {
+         System.err.println(e.getMessage());
+      }
+            
+        
+        
+        
     }//GEN-LAST:event_jBconnectionActionPerformed
 
     private void ItemGererDossierMedical2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemGererDossierMedical2ActionPerformed
