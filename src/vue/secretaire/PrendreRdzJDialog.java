@@ -62,8 +62,14 @@ public class PrendreRdzJDialog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        labelTemoin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -75,7 +81,6 @@ public class PrendreRdzJDialog extends javax.swing.JDialog {
 
         jLabel10.setText("Créneau");
 
-        jTextField1.setText("Tapez le nom d'un patient");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -178,6 +183,7 @@ public class PrendreRdzJDialog extends javax.swing.JDialog {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2))
+            .addComponent(labelTemoin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,7 +191,8 @@ public class PrendreRdzJDialog extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
-                .addGap(0, 38, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(labelTemoin, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -196,8 +203,8 @@ public class PrendreRdzJDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                 .addContainerGap())
@@ -246,19 +253,21 @@ public class PrendreRdzJDialog extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         DaoRdz rdzDao = new DaoRdz();
-        
-        DossierPatient dsp = (DossierPatient)jListPatient.getSelectedValue();
-        Medecin mdc = (Medecin)JComboMdc.getSelectedItem();
-        Creneau creno = (Creneau)JComboCreno.getSelectedItem();
-        String date = JComboDate.getSelectedItem().toString();
-        
-        Rdz rdz = new Rdz(dsp.getId_dossierPatient(), mdc.getId(), date, creno.getId());
-        
-        System.out.println(rdz);
-        
-        rdzDao.insertTim(rdz);
-        
+        if(!jListPatient.getSelectedValue().equals(null)){
+            DossierPatient dsp = (DossierPatient)jListPatient.getSelectedValue();
+            Medecin mdc = (Medecin)JComboMdc.getSelectedItem();
+            Creneau creno = (Creneau)JComboCreno.getSelectedItem();
+            String date = JComboDate.getSelectedItem().toString();
+            Rdz rdz = new Rdz(dsp.getId_dossierPatient(), mdc.getId(), date, creno.getId());
+            rdzDao.insertTim(rdz);
+            this.labelTemoin.setText("Le rendez-vuos a bie été enregistré !");
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+        this.refrechList("");
+    }//GEN-LAST:event_formFocusGained
 
     /**
      * @param args the command line arguments
@@ -318,6 +327,7 @@ public class PrendreRdzJDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel labelTemoin;
     // End of variables declaration//GEN-END:variables
     private final DefaultListModel listModel = new DefaultListModel();
     private final DefaultComboBoxModel combModelMdc = new DefaultComboBoxModel();

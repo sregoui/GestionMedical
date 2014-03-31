@@ -135,7 +135,27 @@ public class DaoDossierPatient implements IDao<DossierPatient> {
 
     @Override
     public void insertTim(DossierPatient objet) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connection cnx = bdd.seConnecter();
+
+            String sql = "INSERT INTO `DossierPatient`(`NOM`, `PRENOM`, `SEXE`, `DATE_DE_NAISSANCE`, `NSS`, `ADRESSE`, `VILLE`, `ZIP_CODE`) VALUES (?,?,?,?,?,?,?,?)";
+            PreparedStatement stat = cnx.prepareStatement(sql);
+            stat.setString(1, objet.getNom());
+            stat.setString(2, objet.getPrenom());
+            stat.setString(3, objet.getSexe());
+            stat.setString(4, objet.getDate_de_naissance());
+            stat.setString(5, objet.getNss());
+            stat.setString(6, objet.getAdresse());
+            stat.setString(7, objet.getVille());
+            stat.setString(8, objet.getZip_code());
+
+            stat.executeUpdate();
+            bdd.seDeconnecter(cnx);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DaoDossierPatient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoDossierPatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
