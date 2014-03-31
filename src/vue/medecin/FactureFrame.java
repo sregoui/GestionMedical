@@ -201,7 +201,7 @@ public class FactureFrame extends javax.swing.JInternalFrame {
             
             //Appel du daoFacture pour afficher les factures par dossierPatient
             IDao dao = FactoryDao.getDAO("Facture");
-            res = dao.selectRetunRes2(dp.getId_dossierPatient());
+            res = dao.selectRetunRes(dp.getId_dossierPatient());
            
             //Modele du tableau à vide
             this.tableModel= new DefaultTableModel();
@@ -249,7 +249,7 @@ public class FactureFrame extends javax.swing.JInternalFrame {
         DossierPatient dp = (DossierPatient) this.jListPatient.getSelectedValue(); 
         Facture f = new Facture();
         IDao daoA = FactoryDao.getDAO("Facture"); //Appel de la daoDossierPattient via la factory
-        java.sql.Date uDate = new java.sql.Date(1);
+        java.sql.Date uDate = new java.sql.Date((new java.util.Date()).getTime());
        
          f.setId_patient(dp.getId_dossierPatient());
          f.setId_medecin(dp.getId_user());
