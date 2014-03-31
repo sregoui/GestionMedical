@@ -85,6 +85,11 @@ public class GestionDocument extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -133,7 +138,7 @@ public class GestionDocument extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -163,13 +168,19 @@ public class GestionDocument extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+ 
+ //Si la combobox est un arret maladie
+ if(jComboBox1.getSelectedIndex() == 1){
         try {
-            SAXParserFactory factory = SAXParserFactory.newInstance();
-            SAXParser parser = factory.newSAXParser();
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        SAXParser parser = factory.newSAXParser();
             
-            UserParser userParser = new UserParser();
-            parser.parse("infos.xml", userParser);
-            
+        UserParser userParser = new UserParser();
+        // Reccuperer infos pour l'arret maladie
+        parser.parse("infos.xml", userParser);
+        
+        
+        
              //Affiche les infos dans le TextArea, Persistance de l'info
         String infoUser = "Docteur "+medecin.getNom();     
         infoUser+= " "+medecin.getPrenom();     
@@ -186,6 +197,9 @@ public class GestionDocument extends javax.swing.JInternalFrame {
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(GestionDocument.class.getName()).log(Level.SEVERE, null, ex);
         }
+ }
+ 
+ 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -231,6 +245,10 @@ public class GestionDocument extends javax.swing.JInternalFrame {
 //            Logger.getLogger(GestionDocument.class.getName()).log(Level.SEVERE, null, ex);
 //        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
      private  DefaultComboBoxModel dcmDor= new DefaultComboBoxModel();
 
