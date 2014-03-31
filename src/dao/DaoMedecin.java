@@ -100,7 +100,39 @@ public class DaoMedecin implements IDao<Medecin> {
 
     @Override
     public List<Medecin> selectAllTim() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Medecin mdc = null;
+        List listMDC = new ArrayList();
+        
+        try {
+            Connection cnx = bdd.seConnecter();
+            String sql = "select * from user where ID_ROLE_USER > 2";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next())
+            {
+                int _id = (rs.getInt("ID_USER"));
+                int id_role = (rs.getInt("ID_ROLE_USER"));
+                String login = rs.getString("LOGIN_USER");
+                String pwd = rs.getString("PWD_USER");
+                String nom = rs.getString("NOM");
+                String prenom = rs.getString("PRENOM");
+                String email = rs.getString("EMAIL");
+                String port = rs.getString("TEL_POR");
+                String fix = rs.getString("TEL_FIXE");
+                
+                mdc = new Medecin(_id, login, pwd, id_role, nom, prenom, email, port, fix);
+
+                listMDC.add(mdc);
+                
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ex.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage());
+        }
+        
+        return listMDC;
     }
 
     @Override
@@ -115,7 +147,36 @@ public class DaoMedecin implements IDao<Medecin> {
 
     @Override
     public Medecin selectByIdTim(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Medecin mdc = null;
+        
+        try {
+            Connection cnx = bdd.seConnecter();
+            String sql = "select * from user where id_user="+id;
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next())
+            {
+                int _id = (rs.getInt("ID_USER"));
+                int id_role = (rs.getInt("ID_ROLE_USER"));
+                String login = rs.getString("LOGIN_USER");
+                String pwd = rs.getString("PWD_USER");
+                String nom = rs.getString("NOM");
+                String prenom = rs.getString("PRENOM");
+                String email = rs.getString("EMAIL");
+                String port = rs.getString("TEL_POR");
+                String fix = rs.getString("TEL_FIXE");
+                
+                mdc = new Medecin(_id, login, pwd, id_role, nom, prenom, email, port, fix);
+                
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ex.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage());
+        }
+        
+        return mdc;
     }
 
 

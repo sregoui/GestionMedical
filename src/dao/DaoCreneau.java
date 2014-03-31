@@ -7,8 +7,13 @@
 package dao;
 
 import contrat.IDao;
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import metier.gestionRdz.*;
 import metier.personnel.Medecin;
 import metier.personnel.Utilisateur;
@@ -76,11 +81,6 @@ public class DaoCreneau implements IDao<Creneau> {
     }
 
     @Override
-    public List<Creneau> selectAllTim() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void updateTim(Creneau objet) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -92,14 +92,62 @@ public class DaoCreneau implements IDao<Creneau> {
 
     @Override
     public Creneau selectByIdTim(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Creneau creno = null;
+        
+        try {
+            Connection cnx = bdd.seConnecter();
+            String sql = "select * from creneau where ID_CRENEAU="+id;
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next())
+            {
+                int _id = (rs.getInt("ID_CRENEAU"));
+                String titre = rs.getString("INTITULE");
+                
+                creno = new Creneau(_id, titre);
+                
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ex.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage());
+        }
+        
+        return creno;
     }
 
 
     @Override
-    public List selectAllTim(Utilisateur user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Creneau> selectAllTim() {
+        Creneau creno = null;
+        List listCRENO = new ArrayList();
+        
+        try {
+            Connection cnx = bdd.seConnecter();
+            String sql = "select * from creneau";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next())
+            {
+                int _id = (rs.getInt("ID_CRENEAU"));
+                String titre = rs.getString("INTITULE");
+                
+                creno = new Creneau(_id, titre);
+
+                listCRENO.add(creno);
+                
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ex.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage());
+        }
+        
+        return listCRENO;
     }
+
 
     @Override
     public ResultSet selectRetunRes(int id_dossierPatient) {
@@ -126,7 +174,10 @@ public class DaoCreneau implements IDao<Creneau> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public List selectAllTim(Utilisateur user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-
-    
+  
 }
