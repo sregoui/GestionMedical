@@ -62,6 +62,8 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="jBImprimer" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jButton2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
           </Group>
@@ -98,7 +100,10 @@
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBImprimer" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="100" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -205,6 +210,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLMessage">
+    </Component>
+    <Component class="javax.swing.JButton" name="jBImprimer">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Imprimer"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBImprimerActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

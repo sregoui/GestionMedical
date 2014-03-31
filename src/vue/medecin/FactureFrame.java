@@ -8,6 +8,7 @@ package vue.medecin;
 
 import contrat.IDao;
 import factory.FactoryDao;
+import java.awt.print.PrinterException;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -16,6 +17,7 @@ import java.text.DateFormat;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import metier.facturation.Facture;
 import metier.patient.DossierMedical;
@@ -51,8 +53,6 @@ public class FactureFrame extends javax.swing.JInternalFrame {
         
         
         this.jListPatient.setListData(p);   //Chargement de la liste
-        
-        
 
     }
     /**
@@ -76,6 +76,7 @@ public class FactureFrame extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLMessage = new javax.swing.JLabel();
+        jBImprimer = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -122,6 +123,13 @@ public class FactureFrame extends javax.swing.JInternalFrame {
 
         jButton2.setText("Paiement Imédiat");
 
+        jBImprimer.setText("Imprimer");
+        jBImprimer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBImprimerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,6 +162,8 @@ public class FactureFrame extends javax.swing.JInternalFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBImprimer)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(27, 27, 27))
         );
@@ -182,7 +192,9 @@ public class FactureFrame extends javax.swing.JInternalFrame {
                         .addGap(29, 29, 29)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jBImprimer))
                 .addContainerGap(100, Short.MAX_VALUE))
         );
 
@@ -260,8 +272,21 @@ public class FactureFrame extends javax.swing.JInternalFrame {
          jLMessage.setText("Votre actes à été insérer");
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jBImprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBImprimerActionPerformed
+        // TODO add your handling code here:
+  //Permet d'imprimer le document
+        try {
+            // TODO add your handling code here:
+            jTable1.print();
+        } catch (PrinterException ex) {
+            Logger.getLogger(GestionDocument.class.getName()).log(Level.SEVERE, null, ex);
+        }      
+        
+    }//GEN-LAST:event_jBImprimerActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBImprimer;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLMessage;

@@ -8,16 +8,10 @@ package vue.medecin;
 
 
 import XML.UserParser;
-import contrat.IDao;
 import dao.DaoDocument;
-import factory.FactoryDao;
 import java.awt.print.PrinterException;
-import java.beans.XMLEncoder;
-import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -30,11 +24,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import metier.patient.Document;
-import metier.personnel.Utilisateur;
-import org.jdom2.Element;
-import org.jdom2.input.SAXBuilder;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
+import metier.personnel.Medecin;
 import org.xml.sax.SAXException;
 
 /**
@@ -43,13 +33,15 @@ import org.xml.sax.SAXException;
  */
 public class GestionDocument extends javax.swing.JInternalFrame {
 
+    private Medecin medecin;
     /**
      * Creates new form CreerDocument
      */
-    public GestionDocument() {
+    public GestionDocument(Medecin m) {
         initComponents();
          initList();
         this.setVisible(true);
+        medecin = m;
     }
 
         public void initList(){
@@ -176,8 +168,16 @@ public class GestionDocument extends javax.swing.JInternalFrame {
             SAXParser parser = factory.newSAXParser();
             
             UserParser userParser = new UserParser();
-            
             parser.parse("infos.xml", userParser);
+            
+             //Affiche les infos dans le TextArea, Persistance de l'info
+        String infoUser = "Docteur "+medecin.getNom();     
+        infoUser+= " "+medecin.getPrenom();     
+        infoUser += "\n "+medecin.getTelFixe();
+        infoUser += "\n "+medecin.getTelPort();     
+        infoUser += "\n "+medecin.getEmail();      
+        jTextArea1.setText(infoUser);  
+
             
         } catch (SAXException ex) {
             Logger.getLogger(GestionDocument.class.getName()).log(Level.SEVERE, null, ex);

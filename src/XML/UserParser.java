@@ -20,9 +20,19 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class UserParser extends DefaultHandler{
     
-    private String valeur;
+    public String valeur;
     private Utilisateur user;
     private DaoUtilisateur dao;
+
+    
+    public String getValeur() {
+        return valeur;
+    }
+
+    public void setValeur(String valeur) {
+        this.valeur = valeur;
+    }
+    
 
     @Override
     public void characters(char[] chars, int i, int i1) throws SAXException {
@@ -31,7 +41,9 @@ public class UserParser extends DefaultHandler{
        if(i1!= 0){ 
         
        this.valeur =  new String(chars, i, i1);
+       
        }
+       
         //System.out.println("J'ai trouvé du texte : " + txt);
      
     }
@@ -57,6 +69,8 @@ public class UserParser extends DefaultHandler{
           this.user.setTelPort(this.valeur);
          break;
         case "utilisateur":
+            System.out.println(user.toString());
+            this.setValeur("fds");
         break;
         default:
             break;
@@ -87,6 +101,7 @@ public class UserParser extends DefaultHandler{
         super.startDocument(); //To change body of generated methods, choose Tools | Templates.
         
           System.out.println("Début du document");
+          
     }
 
     @Override

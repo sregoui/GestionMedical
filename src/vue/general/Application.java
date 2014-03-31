@@ -462,7 +462,7 @@ public class Application extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         //On va reccuperer l'InternalFrame VoirDocument lors du clic
-        this.internalVoirDocument = new GestionDocument();
+        this.internalVoirDocument = new GestionDocument(m);
         this.desktopPane.add(this.internalVoirDocument);
         internalVoirDocument.setTitle("Gestion des Document");
     }//GEN-LAST:event_jButton5ActionPerformed
