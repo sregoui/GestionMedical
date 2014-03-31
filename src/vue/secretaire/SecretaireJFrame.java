@@ -5,11 +5,13 @@
 package vue.secretaire;
 
 import contrat.IDao;
-import dao.DaoRdz;
+import dao.*;
 import factory.FactoryDao;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import metier.gestionRdz.Rdz;
+import metier.gestionRdz.*;
+import metier.patient.*;
+import metier.personnel.*;
 
 /**
  *
@@ -235,7 +237,7 @@ public class SecretaireJFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGap(18, 419, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -251,7 +253,7 @@ public class SecretaireJFrame extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -265,15 +267,15 @@ public class SecretaireJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new PrendreRdzJFrame().setVisible(true);
+        new PrendreRdzJDialog(this, true).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        new ListFactureJFrame().setVisible(true);
+        new ListFactureJDialog(this, true).setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new ListDossierPatientJFrame().setVisible(true);
+        new ListDSPJDialog(this, true).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -281,7 +283,7 @@ public class SecretaireJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        new PlanningJFrame().setVisible(true);
+        new PlanningJDialog(this, true).setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
@@ -348,15 +350,33 @@ public class SecretaireJFrame extends javax.swing.JFrame {
         String[] columnNames = {"Patient", "Médecin", "Spécialité", "Date", "Créneau"};
 
         DefaultTableModel dtm = new DefaultTableModel(columnNames , 0);
-//        dtm.setColumnCount(5);
-//        DaoRdz rdzDao = new DaoRdz();
-//        List<Rdz> listRDZ = rdzDao.selectAll();
-//        
-//        for (Rdz r : listRDZ) {
-//            Rdz rdz = (Rdz)r;
-//            dtm.addRow(new Object[]{r.getPatient(), r.getMedecin(), r.getSpecialite(), r.getDate(), r.getCreneau()});
-//        }
-//        dtm.addRow(new Object[]{"test", "test", "test", "test", "test"});
+        dtm.setColumnCount(5);
+        IDao rdzDao = FactoryDao.getDAO("Rdz");
+        
+        DaoMedecin mdcDao = new DaoMedecin();
+        DaoCreneau crenoDao = new DaoCreneau();
+        DaoDossierPatient dspDao = new DaoDossierPatient();
+        DaoRole roleDao = new DaoRole();
+        
+        List<Rdz> listRDZ = rdzDao.selectAllTim();
+        
+        for (Rdz r : listRDZ) 
+        {
+            Rdz rdz = (Rdz)r;
+            Medecin mdc = mdcDao.selectByIdTim(r.getMedecin());
+            DossierPatient dsp = dspDao.selectByIdTim(r.getPatient());
+            Creneau creno = crenoDao.selectByIdTim(r.getCreneau());
+            Role role = roleDao.selectByIdTim(mdc.getId_role());
+            
+            dtm.addRow(new Object[]
+            {
+                dsp.getNom()+" "+dsp.getPrenom(), 
+                mdc.getNom()+" "+mdc.getPrenom(), 
+                role.getIntitule(), 
+                r.getDate(), 
+                creno.getIntitule()
+            });
+        }
         return dtm;
     }
 
