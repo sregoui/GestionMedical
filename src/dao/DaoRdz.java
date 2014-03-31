@@ -157,7 +157,39 @@ public class DaoRdz implements IDao<Rdz> {
 
     @Override
     public List<Rdz> selectAllbyFiltreTim(String champFiltr, String valeur) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List rdzList = new ArrayList();
+        
+        try 
+        {
+            Connection cnx = bdd.seConnecter();
+            
+            String selectRole = "select ID_ROLE from role where INTITULE='"+valeur+"'";
+            String selectMdc = "select ID_USER from user where ID_ROLE_USER =("+selectRole+")";
+            String selectRdz = "select * from rdz where ID_MEDECIN_RDZ=("+selectMdc+")";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(selectRdz);
+            
+            while(rs.next())
+            {
+                Rdz rdz = new Rdz();
+                
+                rdz.setId(rs.getInt("ID_RDV"));
+                rdz.setDate(rs.getString("DATE"));
+                rdz.setMedecin(rs.getInt("ID_MEDECIN_RDZ"));
+                rdz.setPatient(rs.getInt("ID_DOSSIER_PATIENT_RDZ"));
+                rdz.setCreneau(rs.getInt("ID_CRENEAU_RDZ"));
+                
+                rdzList.add(rdz);
+            }
+            
+        } catch (ClassNotFoundException ex) 
+        {
+            Logger.getLogger(DaoRdz.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoRdz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return rdzList;
     }
 
     @Override

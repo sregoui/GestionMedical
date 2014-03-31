@@ -47,7 +47,7 @@ public class Role extends Metier {
 
     @Override
     public String toString() {
-        return "Role{" + "id=" + id + ", intitule=" + intitule + '}';
+        return intitule;
     }
     
     
