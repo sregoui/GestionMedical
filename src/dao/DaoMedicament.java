@@ -47,13 +47,37 @@ public class DaoMedicament implements IDao<Medicament> {
        List<Medicament> l = new ArrayList<>();
         try {
             Connection cnx = bdd.seConnecter();
-            String sql = "select * from medicament";
+            String sql = "select libelle from medicament";
             Statement stat = cnx.createStatement();
             ResultSet res = stat.executeQuery(sql);
 
             while (res.next()) {
-               Medicament m = new Medicament(res.getInt("id_medicament"), res.getString("libelle"));
+               Medicament m = new Medicament(res.getString("libelle"));
                 l.add(m);
+            }
+
+            bdd.seDeconnecter(cnx);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DaoUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return l;
+    }
+    
+
+    public ArrayList selectAll2() {
+    
+       ArrayList<String> l = new ArrayList<String>();
+        try {
+            Connection cnx = bdd.seConnecter();
+            String sql = "select libelle from medicament";
+            Statement stat = cnx.createStatement();
+            ResultSet res = stat.executeQuery(sql);
+
+            while (res.next()) {
+                
+                l.add(res.getString("libelle"));
             }
 
             bdd.seDeconnecter(cnx);
