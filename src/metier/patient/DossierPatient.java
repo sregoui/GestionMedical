@@ -55,6 +55,18 @@ public class DossierPatient extends Metier implements Serializable{
         this.id_user = id_user;
 
     }
+    
+    public DossierPatient(String nom, String prenom, String sexe, String date_de_naissance, String nss, String adresse, String ville, String zip_code) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.sexe = sexe;
+        this.date_de_naissance = date_de_naissance;
+        this.nss = nss;
+        this.adresse = adresse;
+        this.ville = ville;
+        this.zip_code = zip_code;
+
+    }
    
     
    

@@ -62,6 +62,6 @@ public class Medecin extends Utilisateur {
 
     @Override
     public String toString() {
-        return "Medecin{" + "dossierMedical=" + dossierMedical + ", facture=" + facture + ", rdz=" + rdz + '}';
+        return  this.getNom() + " " + this.getPrenom();
     }
 }

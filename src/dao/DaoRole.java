@@ -7,20 +7,24 @@
 package dao;
 
 import contrat.IDao;
+import static contrat.IDao.bdd;
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
-import metier.facturation.*;
-import metier.personnel.Medecin;
-import metier.personnel.Utilisateur;
+import java.util.logging.Logger;
+import metier.personnel.*;
 
 /**
  *
- * @author Samia
+ * @author Toiha
  */
-public class DaoRepartition implements IDao<Repartition> {
+public class DaoRole implements IDao<Role>{
 
     @Override
-    public void insert(Repartition objet) {
+    public void insert(Role objet) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -30,17 +34,17 @@ public class DaoRepartition implements IDao<Repartition> {
     }
 
     @Override
-    public void delete(Repartition objet) {
+    public void delete(Role objet) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Repartition> selectAll() {
+    public List<Role> selectAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(Repartition objet) {
+    public void update(Role objet) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -50,17 +54,17 @@ public class DaoRepartition implements IDao<Repartition> {
     }
 
     @Override
-    public Repartition selectById(int id) {
+    public Role selectById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List selectAll(Utilisateur user) {
+    public List<Role> selectAllbyMedecin() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void insertTim(Repartition objet) {
+    public void insertTim(Role objet) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -70,17 +74,36 @@ public class DaoRepartition implements IDao<Repartition> {
     }
 
     @Override
-    public void deleteTim(Repartition objet) {
+    public void deleteTim(Role objet) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Repartition> selectAllTim() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Role> selectAllTim() {
+        Role role = null;
+        List listROLE = new ArrayList();
+        try {
+            Connection cnx = bdd.seConnecter();
+            String sql = "select * from role where ID_ROLE > 2";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next())
+            {
+                int _id = (rs.getInt("ID_ROLE"));
+                String intitule = rs.getString("INTITULE");
+                role = new Role(_id, intitule);
+                listROLE.add(role);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ex.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage());
+        }
+        return listROLE;
     }
 
     @Override
-    public void updateTim(Repartition objet) {
+    public void updateTim(Role objet) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -90,13 +113,49 @@ public class DaoRepartition implements IDao<Repartition> {
     }
 
     @Override
-    public Repartition selectByIdTim(int id) {
+    public Role selectByIdTim(int id) {
+        Role role = null;
+        
+        try {
+            Connection cnx = bdd.seConnecter();
+            String sql = "select * from role where ID_ROLE="+id;
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next())
+            {
+                int _id = (rs.getInt("ID_ROLE"));
+                String intitule = rs.getString("INTITULE");
+                
+                role = new Role(_id, intitule);
+                
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ex.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage());
+        }
+        
+        return role;
+    }
+
+    @Override
+    public List<Role> selectAllbyMedecinTim() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public List selectAll(Utilisateur user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
     public List selectAllTim(Utilisateur user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Role> selectAllbyFiltreTim(String champFiltr, String valeur) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -109,21 +168,5 @@ public class DaoRepartition implements IDao<Repartition> {
     public ResultSet selectRetunRes2(int id_dossierPatient) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public List<Repartition> selectAllbyMedecin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Repartition> selectAllbyMedecinTim() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Repartition> selectAllbyFiltreTim(String champFiltr, String valeur) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     
 }

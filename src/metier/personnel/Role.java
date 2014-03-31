@@ -4,22 +4,29 @@
  * and open the template in the editor.
  */
 
-package metier.gestionRdz;
+package metier.personnel;
 
 import contrat.Metier;
 
 /**
  *
- * @author Samia
+ * @author Toiha
  */
-public class Creneau extends Metier {
+public class Role extends Metier {
     
     private int id;
     private String intitule;
 
-    public Creneau(int id, String intitule) {
+    public Role(int id, String intitule) {
         this.id = id;
         this.intitule = intitule;
+    }
+
+    public Role(String intitule) {
+        this.intitule = intitule;
+    }
+
+    public Role() {
     }
 
     public int getId() {
@@ -38,14 +45,10 @@ public class Creneau extends Metier {
         this.intitule = intitule;
     }
 
-    public Creneau() {
-    }
-
     @Override
     public String toString() {
         return intitule;
     }
-    
     
     
 }

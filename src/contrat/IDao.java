@@ -10,8 +10,7 @@ package contrat;
 import dao.bdd;
 import java.sql.ResultSet;
 import java.util.List;
-import metier.personnel.Medecin;
-import metier.personnel.Utilisateur;
+import metier.personnel.*;
 
 /**
  *
@@ -19,8 +18,6 @@ import metier.personnel.Utilisateur;
  * @param <T>
  */
 public interface IDao<T extends Metier> {
-    
-    
     
     public bdd bdd = new bdd(); 
     public void insert(T objet);
@@ -30,7 +27,9 @@ public interface IDao<T extends Metier> {
     public void update(T objet);
     public ResultSet selectRetunRes();
     public T selectById(int id);
-
+    public List<T> selectAllbyMedecin();
+    public List selectAll(Utilisateur user);
+    public ResultSet selectRetunRes(int id_dossierPatient);
 
     public void insertTim(T objet);
     public void insertFromListTim(List l);
@@ -39,13 +38,10 @@ public interface IDao<T extends Metier> {
     public void updateTim(T objet);
     public ResultSet selectRetunResTim();
     public T selectByIdTim(int id);
-
-
-    public List selectAll(Utilisateur user);
-
+    public List<T> selectAllbyMedecinTim();
+    public List<T> selectAllbyFiltreTim(String champFiltr, String valeur);
     public List selectAllTim(Utilisateur user);
-
-    public ResultSet selectRetunRes(int id_dossierPatient);
-
     public ResultSet selectRetunRes2(int id_dossierPatient);
+
+
 }

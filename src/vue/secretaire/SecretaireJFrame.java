@@ -5,11 +5,15 @@
 package vue.secretaire;
 
 import contrat.IDao;
-import dao.DaoRdz;
+import dao.*;
 import factory.FactoryDao;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
-import metier.gestionRdz.Rdz;
+import metier.gestionRdz.*;
+import metier.patient.*;
+import metier.personnel.*;
 
 /**
  *
@@ -22,7 +26,9 @@ public class SecretaireJFrame extends javax.swing.JFrame {
      */
     public SecretaireJFrame() {
         initComponents();
-        initRdzTable();
+        initRdzTable("");
+        initSpecList();
+        System.out.println(jComboSpec.getSelectedItem());
     }
 
     /**
@@ -46,8 +52,9 @@ public class SecretaireJFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboSpec = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -153,9 +160,26 @@ public class SecretaireJFrame extends javax.swing.JFrame {
 
         jLabel4.setText("12/03/2014");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboSpec.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboSpec.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboSpecItemStateChanged(evt);
+            }
+        });
+        jComboSpec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboSpecActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Spécialité : ");
+
+        jButton8.setText("Rafraichir");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -166,10 +190,12 @@ public class SecretaireJFrame extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addGap(60, 60, 60)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboSpec, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addComponent(jButton8)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -179,8 +205,9 @@ public class SecretaireJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jComboSpec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jButton8))
                 .addContainerGap())
         );
 
@@ -232,10 +259,10 @@ public class SecretaireJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1119, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -251,7 +278,7 @@ public class SecretaireJFrame extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -265,15 +292,15 @@ public class SecretaireJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new PrendreRdzJFrame().setVisible(true);
+        new PrendreRdzJDialog(this, true).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        new ListFactureJFrame().setVisible(true);
+        new ListFactureJDialog(this, true).setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new ListDossierPatientJFrame().setVisible(true);
+        new ListDSPJDialog(this, true).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -281,8 +308,20 @@ public class SecretaireJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        new PlanningJFrame().setVisible(true);
+        new PlanningJDialog(this, true).setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        initRdzTable("");
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jComboSpecItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboSpecItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboSpecItemStateChanged
+
+    private void jComboSpecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboSpecActionPerformed
+       initRdzTable(jComboSpec.getSelectedItem().toString());
+    }//GEN-LAST:event_jComboSpecActionPerformed
 
     /**
      * @param args the command line arguments
@@ -326,7 +365,8 @@ public class SecretaireJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JComboBox jComboSpec;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -341,26 +381,63 @@ public class SecretaireJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+    private final DefaultComboBoxModel combModelSpec = new DefaultComboBoxModel();
     
-    
-    public DefaultTableModel RDZList()
+    public DefaultTableModel RDZList(String filtre)
     {
-        String[] columnNames = {"Patient", "Médecin", "Spécialité", "Date", "Créneau"};
+        String[] columnNames = {"#", "Patient", "Médecin", "Spécialité", "Date", "Créneau"};
 
         DefaultTableModel dtm = new DefaultTableModel(columnNames , 0);
-//        dtm.setColumnCount(5);
-//        DaoRdz rdzDao = new DaoRdz();
-//        List<Rdz> listRDZ = rdzDao.selectAll();
-//        
-//        for (Rdz r : listRDZ) {
-//            Rdz rdz = (Rdz)r;
-//            dtm.addRow(new Object[]{r.getPatient(), r.getMedecin(), r.getSpecialite(), r.getDate(), r.getCreneau()});
-//        }
-//        dtm.addRow(new Object[]{"test", "test", "test", "test", "test"});
+        dtm.setColumnCount(6);
+        IDao rdzDao = FactoryDao.getDAO("Rdz");
+        
+        DaoMedecin mdcDao = new DaoMedecin();
+        DaoCreneau crenoDao = new DaoCreneau();
+        DaoDossierPatient dspDao = new DaoDossierPatient();
+        DaoRole roleDao = new DaoRole();
+        
+        List<Rdz> listRDZ = new ArrayList();
+        if(filtre.equals("")){
+            listRDZ = rdzDao.selectAllTim();
+        }else{
+            listRDZ = rdzDao.selectAllbyFiltreTim("ID_ROLE_USER", filtre);
+        }
+        
+        int index = 1;
+        for (Rdz r : listRDZ) 
+        {
+            Rdz rdz = (Rdz)r;
+            Medecin mdc = mdcDao.selectByIdTim(r.getMedecin());
+            DossierPatient dsp = dspDao.selectByIdTim(r.getPatient());
+            Creneau creno = crenoDao.selectByIdTim(r.getCreneau());
+            Role role = roleDao.selectByIdTim(mdc.getId_role());
+            
+            dtm.addRow(new Object[]
+            {
+                index,
+                dsp, 
+                mdc, 
+                role, 
+                r.getDate(), 
+                creno
+            });
+            index++;
+        }
         return dtm;
     }
 
-    private void initRdzTable(){
-       jTable1.setModel(RDZList());
+    private void initRdzTable(String filtre){
+       jTable1.setModel(RDZList(filtre));
    }
+    
+    private void initSpecList(){
+        DaoRole roleDao = new DaoRole();
+        List<Role> listRole = roleDao.selectAllTim();
+        combModelSpec.addElement("");
+        for (Object r : listRole) {
+            Role  role = (Role)r;
+            combModelSpec.addElement(role);
+        }
+         this.jComboSpec.setModel(combModelSpec);
+    }
 }

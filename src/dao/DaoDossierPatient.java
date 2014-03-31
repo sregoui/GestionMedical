@@ -135,7 +135,27 @@ public class DaoDossierPatient implements IDao<DossierPatient> {
 
     @Override
     public void insertTim(DossierPatient objet) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connection cnx = bdd.seConnecter();
+
+            String sql = "INSERT INTO `DossierPatient`(`NOM`, `PRENOM`, `SEXE`, `DATE_DE_NAISSANCE`, `NSS`, `ADRESSE`, `VILLE`, `ZIP_CODE`) VALUES (?,?,?,?,?,?,?,?)";
+            PreparedStatement stat = cnx.prepareStatement(sql);
+            stat.setString(1, objet.getNom());
+            stat.setString(2, objet.getPrenom());
+            stat.setString(3, objet.getSexe());
+            stat.setString(4, objet.getDate_de_naissance());
+            stat.setString(5, objet.getNss());
+            stat.setString(6, objet.getAdresse());
+            stat.setString(7, objet.getVille());
+            stat.setString(8, objet.getZip_code());
+
+            stat.executeUpdate();
+            bdd.seDeconnecter(cnx);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DaoDossierPatient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoDossierPatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -150,7 +170,39 @@ public class DaoDossierPatient implements IDao<DossierPatient> {
 
     @Override
     public List<DossierPatient> selectAllTim() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DossierPatient dsp = null;
+        List listDSP = new ArrayList();
+        
+        try {
+            Connection cnx = bdd.seConnecter();
+            String sql = "select * from dossierpatient";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next())
+            {
+                int _id = (rs.getInt("ID_DOSSIER_PATIENT"));
+                String nom = rs.getString("NOM");
+                String prenom = rs.getString("PRENOM");
+                String sexe = rs.getString("SEXE");
+                String nss = rs.getString("NSS");
+                String adresse = rs.getString("ADRESSE");
+                String date_de_naissance = rs.getString("DATE_DE_NAISSANCE");
+                String ville = rs.getString("VILLE");
+                String zip = rs.getString("ZIP_CODE");
+                
+//                dsp = new DossierPatient(_id, nom, prenom, sexe, date_de_naissance, nss, adresse, ville, zip, 0, 0);
+                dsp = new DossierPatient(_id, nom, prenom, sexe, date_de_naissance, nss, adresse, ville, zip, 000);
+                listDSP.add(dsp);
+                
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ex.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage());
+        }
+        
+        return listDSP;
     }
 
     @Override
@@ -165,7 +217,37 @@ public class DaoDossierPatient implements IDao<DossierPatient> {
 
     @Override
     public DossierPatient selectByIdTim(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DossierPatient dsp = null;
+        
+        try {
+            Connection cnx = bdd.seConnecter();
+            String sql = "select * from dossierpatient where ID_DOSSIER_PATIENT="+id;
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next())
+            {
+                int _id = (rs.getInt("ID_DOSSIER_PATIENT"));
+                String nom = rs.getString("NOM");
+                String prenom = rs.getString("PRENOM");
+                String sexe = rs.getString("SEXE");
+                String nss = rs.getString("NSS");
+                String adresse = rs.getString("ADRESSE");
+                String date_de_naissance = rs.getString("DATE_DE_NAISSANCE");
+                String ville = rs.getString("VILLE");
+                String zip = rs.getString("ZIP_CODE");
+                
+//                dsp = new DossierPatient(_id, nom, prenom, sexe, date_de_naissance, nss, adresse, ville, zip, 0, 0);
+                dsp = new DossierPatient(_id, nom, prenom, sexe, date_de_naissance, nss, adresse, ville, zip, 000);
+                
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ex.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage());
+        }
+        
+        return dsp;
     }
 
     @Override
@@ -181,6 +263,53 @@ public class DaoDossierPatient implements IDao<DossierPatient> {
     @Override
     public ResultSet selectRetunRes2(int id_dossierPatient) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<DossierPatient> selectAllbyMedecin() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<DossierPatient> selectAllbyMedecinTim() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<DossierPatient> selectAllbyFiltreTim(String champFiltr, String valeur) {
+        DossierPatient dsp = null;
+        List listDSP = new ArrayList();
+        
+        try {
+            Connection cnx = bdd.seConnecter();
+            String sql = "select * from dossierpatient where "+champFiltr+" like '"+valeur+"%'";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next())
+            {
+                int _id = (rs.getInt("ID_DOSSIER_PATIENT"));
+                String nom = rs.getString("NOM");
+                String prenom = rs.getString("PRENOM");
+                String sexe = rs.getString("SEXE");
+                String nss = rs.getString("NSS");
+                String adresse = rs.getString("ADRESSE");
+                String date_de_naissance = rs.getString("DATE_DE_NAISSANCE");
+                String ville = rs.getString("VILLE");
+                String zip = rs.getString("ZIP_CODE");
+                
+//                dsp = new DossierPatient(_id, nom, prenom, sexe, date_de_naissance, nss, adresse, ville, zip, 0, 0);
+                dsp = new DossierPatient(_id, nom, prenom, sexe, date_de_naissance, nss, adresse, ville, zip, 000);
+                listDSP.add(dsp);
+                
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ex.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage());
+        }
+        
+        return listDSP;
     }
     
 }
