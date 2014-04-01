@@ -25,6 +25,7 @@ import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+import vue.admin.FrameInsert;
 import vue.medecin.FactureFrame;
 import vue.medecin.FrameGenerique;
 import vue.medecin.GestionDossierMedical;
@@ -503,7 +504,13 @@ public class Application extends javax.swing.JFrame {
     }//GEN-LAST:event_ItemGererDossierMedical2ActionPerformed
 
     private void jBCreationUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCreationUserActionPerformed
-
+        try {
+            this.internalFrameInsert = new FrameInsert("Utilisateur");
+        } catch (SQLException ex) {
+            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.desktopPane.add(this.internalFrameInsert);
+       internalFrameInsert.setTitle("Ajout d'un utilisateur");
     }//GEN-LAST:event_jBCreationUserActionPerformed
 
     private void jBStatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBStatActionPerformed
@@ -579,5 +586,6 @@ private GestionDossierMedical internalFrameGestionMedical;
 private MedicamentDescriptif internalFrameMedicament;
 private GestionDocument internalVoirDocument;
 private FactureFrame internalFacture;
+private FrameInsert internalFrameInsert;
 
 }

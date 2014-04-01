@@ -31,7 +31,23 @@ public class DaoUtilisateur implements IDao<Utilisateur> {
 
     @Override
     public void insert(Utilisateur objet) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+               try {
+            Connection cnx = bdd.seConnecter();
+
+            String sql = "INSERT INTO `users`(`id_user`, `id_role_user`, `login_user`, `pwd_user`, `nom`, `prenom`, `tel_port`, `tel_fixe`, `email`) VALUES (?,?,?,?,?,?,?,?,?)";
+            PreparedStatement stat = cnx.prepareStatement(sql);
+            stat.setString(1, objet.getNom());
+            stat.setString(2, objet.getPrenom());
+            stat.setString(3, objet.getEmail());
+            stat.setString(4, objet.getPassword());
+
+            stat.executeUpdate();
+            bdd.seDeconnecter(cnx);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DaoUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
