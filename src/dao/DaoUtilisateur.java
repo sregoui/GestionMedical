@@ -75,7 +75,22 @@ public class DaoUtilisateur implements IDao<Utilisateur> {
 
     @Override
     public ResultSet selectRetunRes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         ResultSet res = null;
+         Connection cnx = null;
+        try {
+             cnx = bdd.seConnecter();
+            String sql = "SELECT * FROM `user`";
+            Statement stat = cnx.createStatement();
+            res = stat.executeQuery(sql);
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DaoUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+//            bdd.seDeconnecter(cnx);
+        }
+        return res;
     }
 
     @Override

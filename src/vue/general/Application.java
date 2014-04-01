@@ -503,7 +503,7 @@ public class Application extends javax.swing.JFrame {
     }//GEN-LAST:event_ItemGererDossierMedical2ActionPerformed
 
     private void jBCreationUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCreationUserActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jBCreationUserActionPerformed
 
     private void jBStatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBStatActionPerformed
@@ -579,4 +579,5 @@ private GestionDossierMedical internalFrameGestionMedical;
 private MedicamentDescriptif internalFrameMedicament;
 private GestionDocument internalVoirDocument;
 private FactureFrame internalFacture;
+
 }
