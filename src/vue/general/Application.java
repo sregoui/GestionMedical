@@ -58,7 +58,8 @@ public class Application extends javax.swing.JFrame {
         this.jButton5.setVisible(false);
         this.jButton1.setVisible(false);
         this.jButton2.setVisible(false);
-        this.jButton3.setVisible(false);
+        this.jBCreationUser.setVisible(false);
+        this.jBStat.setVisible(false);
         this.ItemGererDossierMedical2.setVisible(false);
        
     }
@@ -82,9 +83,10 @@ public class Application extends javax.swing.JFrame {
         jTpassword = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         ItemGererDossierMedical2 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jBStat = new javax.swing.JButton();
+        jBCreationUser = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         SecretaireMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -180,11 +182,6 @@ public class Application extends javax.swing.JFrame {
         desktopPane.add(jButton2);
         jButton2.setBounds(0, 160, 170, 80);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/caduccee.png"))); // NOI18N
-        jButton3.setText("UTILITAIRES");
-        desktopPane.add(jButton3);
-        jButton3.setBounds(0, 320, 170, 80);
-
         ItemGererDossierMedical2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/trousse.png"))); // NOI18N
         ItemGererDossierMedical2.setText("DOSSIER ");
         ItemGererDossierMedical2.addActionListener(new java.awt.event.ActionListener() {
@@ -204,6 +201,26 @@ public class Application extends javax.swing.JFrame {
         });
         desktopPane.add(jButton5);
         jButton5.setBounds(0, 240, 170, 80);
+
+        jBStat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/stat.png"))); // NOI18N
+        jBStat.setText("Statistique");
+        jBStat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBStatActionPerformed(evt);
+            }
+        });
+        desktopPane.add(jBStat);
+        jBStat.setBounds(0, 80, 170, 80);
+
+        jBCreationUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/clients.png"))); // NOI18N
+        jBCreationUser.setText("Creation User");
+        jBCreationUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCreationUserActionPerformed(evt);
+            }
+        });
+        desktopPane.add(jBCreationUser);
+        jBCreationUser.setBounds(0, 0, 170, 80);
 
         SecretaireMenu.setMnemonic('f');
         SecretaireMenu.setText("Secretaire");
@@ -258,17 +275,15 @@ public class Application extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 960, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 22, Short.MAX_VALUE))
         );
 
         pack();
@@ -313,8 +328,9 @@ public class Application extends javax.swing.JFrame {
                         this.jButton5.setVisible(false);
                         this.jButton1.setVisible(false);
                         this.jButton2.setVisible(false);
-                        this.jButton3.setVisible(false);
                         this.ItemGererDossierMedical2.setVisible(false);
+                        this.jBCreationUser.setVisible(true);
+                        this.jBStat.setVisible(true);
                     break;
                     case 2://Cas d'une secretaire
                         s = new Secretaire(u.getId(),u.getLogin(),u.getPassword(),u.getId_role(),u.getNom(),u.getPrenom(),u.getEmail(),u.getTelPort(),u.getTelFixe());
@@ -328,7 +344,6 @@ public class Application extends javax.swing.JFrame {
                         this.jButton5.setVisible(false);
                         this.jButton1.setVisible(false);
                         this.jButton2.setVisible(false);
-                        this.jButton3.setVisible(false);
                         this.ItemGererDossierMedical2.setVisible(false);
                     break;
                     case 3://Cas d'un generaliste
@@ -344,7 +359,6 @@ public class Application extends javax.swing.JFrame {
                         this.jButton5.setVisible(true);
                         this.jButton1.setVisible(true);
                         this.jButton2.setVisible(true);
-                        this.jButton3.setVisible(true);
                         this.ItemGererDossierMedical2.setVisible(true);
                     break;
                     case 4://Cas d'un Dentiste
@@ -360,7 +374,6 @@ public class Application extends javax.swing.JFrame {
                         this.jButton5.setVisible(true);
                         this.jButton1.setVisible(true);
                         this.jButton2.setVisible(true);
-                        this.jButton3.setVisible(true);
                         this.ItemGererDossierMedical2.setVisible(true);
                     break;
                     case 5://Cas d'un Radiologue
@@ -376,7 +389,6 @@ public class Application extends javax.swing.JFrame {
                         this.jButton5.setVisible(true);
                         this.jButton1.setVisible(true);
                         this.jButton2.setVisible(true);
-                        this.jButton3.setVisible(true);
                         this.ItemGererDossierMedical2.setVisible(true);
                     break;
                     default:
@@ -458,14 +470,6 @@ public class Application extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jBconnectionActionPerformed
 
-    private void ItemGererDossierMedical2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemGererDossierMedical2ActionPerformed
-
-        //On va reccuperer l'InternalFrame GestionDossierMedical lors du clic
-        this.internalFrameGestionMedical = new GestionDossierMedical(m);
-        this.desktopPane.add(this.internalFrameGestionMedical);
-        internalFrameGestionMedical.setTitle("Gestion des Patients");
-    }//GEN-LAST:event_ItemGererDossierMedical2ActionPerformed
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         //On va reccuperer l'InternalFrame VoirDocument lors du clic
@@ -489,6 +493,22 @@ public class Application extends javax.swing.JFrame {
         this.desktopPane.add(this.internalFrameMedicament);
        internalFrameMedicament.setTitle("Medicament");
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void ItemGererDossierMedical2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemGererDossierMedical2ActionPerformed
+
+        //On va reccuperer l'InternalFrame GestionDossierMedical lors du clic
+        this.internalFrameGestionMedical = new GestionDossierMedical(m);
+        this.desktopPane.add(this.internalFrameGestionMedical);
+        internalFrameGestionMedical.setTitle("Gestion des Patients");
+    }//GEN-LAST:event_ItemGererDossierMedical2ActionPerformed
+
+    private void jBCreationUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCreationUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBCreationUserActionPerformed
+
+    private void jBStatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBStatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBStatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -537,10 +557,11 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JDesktopPane desktopPane;
+    private javax.swing.JButton jBCreationUser;
+    private javax.swing.JButton jBStat;
     private javax.swing.JButton jBconnection;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
