@@ -68,13 +68,13 @@ public class GestionDocument extends javax.swing.JInternalFrame implements Docum
         ActionMap am = textArea.getActionMap();
         im.put(KeyStroke.getKeyStroke("ENTER"), COMMIT_ACTION);
         am.put(COMMIT_ACTION, new GestionDocument.CommitAction());
-         initList();
+        initList();
         this.setVisible(true);
         medecin = m;
         //IDao dao = FactoryDao.getDAO("Medicament"); //Appel de la factory pour reccuperer le DaoUtilisateur
        DaoMedicament dao = new DaoMedicament();
        words = dao.selectAll2(); //Reccupération d'un type liste via la méthode selectAll (ensemble des users)
-
+        System.out.println(words);
 
     }
 
@@ -249,8 +249,8 @@ public class GestionDocument extends javax.swing.JInternalFrame implements Docum
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        JFileChooser saver = new JFileChooser("./");  
-      //  saver.setFileFilter(new Text_Filter());  
+        JFileChooser saver = new JFileChooser("c:/");  
+        //saver.setFileFilter(new Text_Filter());  
         int returnVal = saver.showSaveDialog(this);  
         File file = saver.getSelectedFile();  
         BufferedWriter writer = null;  
@@ -270,14 +270,7 @@ public class GestionDocument extends javax.swing.JInternalFrame implements Docum
                         "Error!", JOptionPane.INFORMATION_MESSAGE);  
             }  
         }  
-        
-        
-//        
-//try (BufferedWriter fileOut = new BufferedWriter(new FileWriter("Sam.doc"))) {
-//    jTextArea1.write(fileOut);
-//}       catch (IOException ex) {
-//            Logger.getLogger(GestionDocument.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged

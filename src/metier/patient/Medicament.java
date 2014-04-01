@@ -16,10 +16,14 @@ import java.io.Serializable;
 public class Medicament extends Metier implements Serializable {
     private int id_medicament;
     private String libelle;
+    private String descriptif;
+    private String dosage;
 
-    public Medicament(int id_medicament, String libelle) {
+    public Medicament(int id_medicament, String libelle, String descriptif, String dosage) {
         this.id_medicament = id_medicament;
         this.libelle = libelle;
+        this.descriptif = descriptif;
+        this.dosage = dosage;
     }
 
     public Medicament(String libelle) {
@@ -42,9 +46,27 @@ public class Medicament extends Metier implements Serializable {
         this.libelle = libelle;
     }
 
+    public String getDescriptif() {
+        return descriptif;
+    }
+
+    public void setDescriptif(String descriptif) {
+        this.descriptif = descriptif;
+    }
+
+    public String getDosage() {
+        return dosage;
+    }
+
+    public void setDosage(String dosage) {
+        this.dosage = dosage;
+    }
+    
+    
+
     @Override
     public String toString() {
-        return "Medicament{" + "id_medicament=" + id_medicament + ", libelle=" + libelle + '}';
+        return libelle;
     }
     
 }

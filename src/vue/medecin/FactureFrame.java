@@ -270,6 +270,8 @@ public class FactureFrame extends javax.swing.JInternalFrame {
          f.setMontant(jTTarif.getText());
          daoA.insert(f);
          jLMessage.setText("Votre actes à été insérer");
+         
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jBImprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBImprimerActionPerformed
@@ -284,6 +286,7 @@ public class FactureFrame extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jBImprimerActionPerformed
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBImprimer;

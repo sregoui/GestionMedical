@@ -143,7 +143,33 @@ public class DaoMedicament implements IDao<Medicament> {
 
     @Override
     public List<Medicament> selectAllTim() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         Medicament m = null;
+        List listM = new ArrayList();
+        
+        try {
+            Connection cnx = bdd.seConnecter();
+            String sql = "select * from medicament";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next())
+            {
+                int _id = (rs.getInt("id_medicament"));
+                String libelle = rs.getString("libelle");
+                String descriptif = rs.getString("descriptif");
+                String dosage = rs.getString("dosage");
+
+                m = new Medicament(_id, libelle,descriptif,dosage);
+                listM.add(m);
+                
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ex.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage());
+        }
+        
+        return listM;
     }
 
     @Override
@@ -190,9 +216,36 @@ public class DaoMedicament implements IDao<Medicament> {
 
     @Override
     public List<Medicament> selectAllbyFiltreTim(String champFiltr, String valeur) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Medicament m = null;
+        List listM = new ArrayList();
+        
+        try {
+            Connection cnx = bdd.seConnecter();
+            String sql = "select * from medicament where "+champFiltr+" like '"+valeur+"%'";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next())
+            {
+                int _id = (rs.getInt("id_medicament"));
+                String libelle = rs.getString("libelle");
+                String descriptif = rs.getString("descriptif");
+                String dosage = rs.getString("dosage");
+
+                m = new Medicament(_id, libelle,descriptif,dosage);
+                listM.add(m);
+                
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ex.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage());
+        }
+        
+        return listM;
+    }
     }
 
 
     
-}
+

@@ -29,6 +29,7 @@ import vue.medecin.FactureFrame;
 import vue.medecin.FrameGenerique;
 import vue.medecin.GestionDossierMedical;
 import vue.medecin.GestionDocument;
+import vue.medecin.MedicamentDescriptif;
 
 /**
  *
@@ -257,11 +258,17 @@ public class Application extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1265, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 960, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 960, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -477,12 +484,8 @@ public class Application extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            //On va reccuperer l'InternalFrame FrameGenerique lors du clic
-            this.internalFrameMedicament = new FrameGenerique("Medicament");
-        } catch (SQLException ex) {
-            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        this.internalFrameMedicament = new MedicamentDescriptif();
         this.desktopPane.add(this.internalFrameMedicament);
        internalFrameMedicament.setTitle("Medicament");
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -552,7 +555,7 @@ public class Application extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 private GestionDossierMedical internalFrameGestionMedical;
-private FrameGenerique internalFrameMedicament;
+private MedicamentDescriptif internalFrameMedicament;
 private GestionDocument internalVoirDocument;
 private FactureFrame internalFacture;
 }
