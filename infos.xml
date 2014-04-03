@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <racine>
-  <utilisateur id="2">
-    <nom>Smith</nom>
-    <prenom>John</prenom>
-    <tel_port>0654677844</tel_port>
-    <tel_fixe>0156439875</tel_fixe>
-    <email>sam@free.fr</email>
+  <utilisateur id="4">
+    <nom>Zalm</nom>
+    <prenom>Laura</prenom>
+    <tel_port>062231245</tel_port>
+    <tel_fixe>049222112</tel_fixe>
+    <email>laura.zalm@free.fr</email>
   </utilisateur>
 </racine>

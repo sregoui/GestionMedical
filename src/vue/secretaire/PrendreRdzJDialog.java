@@ -31,18 +31,13 @@ public class PrendreRdzJDialog extends javax.swing.JDialog {
     /**
      * Creates new form PrendreRdzJDialog
      */
-    public PrendreRdzJDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public PrendreRdzJDialog(javax.swing.JInternalFrame parent, boolean modal) {
         initComponents();
         this.refrechList("");
         this.initComboList();
+        //this.setVisible(true);
     }
-    public PrendreRdzJDialog(java.awt.Dialog parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-        this.refrechList("");
-        this.initComboList();
-    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -305,7 +300,7 @@ public class PrendreRdzJDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                PrendreRdzJDialog dialog = new PrendreRdzJDialog(new javax.swing.JFrame(), true);
+                PrendreRdzJDialog dialog = new PrendreRdzJDialog(new javax.swing.JInternalFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
