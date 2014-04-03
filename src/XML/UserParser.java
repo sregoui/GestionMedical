@@ -69,8 +69,6 @@ public class UserParser extends DefaultHandler{
           this.user.setTelPort(this.valeur);
          break;
         case "utilisateur":
-            System.out.println(user.toString());
-            this.setValeur("fds");
         break;
         default:
             break;

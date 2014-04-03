@@ -82,7 +82,11 @@ public class FrameInsert extends JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         btValider = new javax.swing.JButton();
 
+        setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
