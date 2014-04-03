@@ -31,8 +31,7 @@ public class PlanningJDialog extends javax.swing.JDialog {
     /**
      * Creates new form PlanningJDialog
      */
-    public PlanningJDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public PlanningJDialog(javax.swing.JInternalFrame parent, boolean modal) {
         initComponents();
         initSpecList();
         initMcdList();
@@ -149,7 +148,7 @@ public class PlanningJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-       new PrendreRdzJDialog(this, true).setVisible(true);
+      // new PrendreRdzJDialog(this, true).setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jComboSpecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboSpecActionPerformed
@@ -190,7 +189,7 @@ public class PlanningJDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                PlanningJDialog dialog = new PlanningJDialog(new javax.swing.JFrame(), true);
+                PlanningJDialog dialog = new PlanningJDialog(new javax.swing.JInternalFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -31,6 +31,7 @@ import vue.medecin.FrameGenerique;
 import vue.medecin.GestionDossierMedical;
 import vue.medecin.GestionDocument;
 import vue.medecin.MedicamentDescriptif;
+import vue.secretaire.SecretaireJFrame;
 
 /**
  *
@@ -346,6 +347,9 @@ public class Application extends javax.swing.JFrame {
                         this.jButton1.setVisible(false);
                         this.jButton2.setVisible(false);
                         this.ItemGererDossierMedical2.setVisible(false);
+                        this.internalSecretaire = new SecretaireJFrame();
+                        this.desktopPane.add(this.internalSecretaire);
+                        internalSecretaire.setTitle("Accueil");
                     break;
                     case 3://Cas d'un generaliste
                         m = new Medecin(u.getId(),u.getLogin(),u.getPassword(),u.getId_role(),u.getNom(),u.getPrenom(),u.getEmail(),u.getTelPort(),u.getTelFixe());
@@ -587,5 +591,6 @@ private MedicamentDescriptif internalFrameMedicament;
 private GestionDocument internalVoirDocument;
 private FactureFrame internalFacture;
 private FrameInsert internalFrameInsert;
+private SecretaireJFrame internalSecretaire;
 
 }
