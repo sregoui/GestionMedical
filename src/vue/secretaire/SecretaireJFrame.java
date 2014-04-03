@@ -371,35 +371,56 @@ public class SecretaireJFrame extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
     private final DefaultComboBoxModel combModelSpec = new DefaultComboBoxModel();
     
+    /**
+     * Initialisation du model pour le tableau des rendez-vous
+     * filtre est un champs de la table avec lequel on va trier la séléction
+     * @param filtre
+     * @return 
+     */
     public DefaultTableModel RDZList(String filtre)
     {
+        
+//        Initialisation de la ligne entête du tableau
         String[] columnNames = {"#", "Patient", "Médecin", "Spécialité", "Date", "Créneau"};
 
+//        Instanciation du model pour le tableau
         DefaultTableModel dtm = new DefaultTableModel(columnNames , 0);
-        dtm.setColumnCount(6);
-        IDao rdzDao = FactoryDao.getDAO("Rdz");
         
+//        Renseignement du nombre de colonnes
+        dtm.setColumnCount(6);
+        
+//        Instanciation du DAO RDZ, Medecin, Creneau, DossierPatient et Role
+        IDao rdzDao = FactoryDao.getDAO("Rdz");
         DaoMedecin mdcDao = new DaoMedecin();
         DaoCreneau crenoDao = new DaoCreneau();
         DaoDossierPatient dspDao = new DaoDossierPatient();
         DaoRole roleDao = new DaoRole();
         
+//        Intanciation d'une arrayList pour stocker les rdv
         List<Rdz> listRDZ = new ArrayList();
+        
+//        Si un filtre n'existe pas on prends toutes la table sinon on séléction selon ce dernier
+//        Et on stocke le tout dans la liste
         if(filtre.equals("")){
             listRDZ = rdzDao.selectAllTim();
         }else{
+//            La method selectAllbyFiltreTim renvoie une liste
             listRDZ = rdzDao.selectAllbyFiltreTim("ID_ROLE_USER", filtre);
         }
         
+//        On parcour notre liste pour stocker item par item dans le model du tableau
         int index = 1;
         for (Rdz r : listRDZ) 
         {
             Rdz rdz = (Rdz)r;
+//            Avec l'id du medecin dans la ligne rdv on récupère l'objet medecin
+//            ainsi de meme avec le dossierPatient, Creneau  et role
             Medecin mdc = mdcDao.selectByIdTim(r.getMedecin());
             DossierPatient dsp = dspDao.selectByIdTim(r.getPatient());
             Creneau creno = crenoDao.selectByIdTim(r.getCreneau());
             Role role = roleDao.selectByIdTim(mdc.getId_role());
             
+//            On ajoute une ligne dans le model de tableau avec les éléments qui viennent d'êrte récupéré
             dtm.addRow(new Object[]
             {
                 index,
@@ -411,15 +432,26 @@ public class SecretaireJFrame extends javax.swing.JInternalFrame {
             });
             index++;
         }
+//        On renvoi le model  de tableau
         return dtm;
     }
 
+    /**
+     * On initialise le tableau des rdv avec le model deja defini
+     * @param filtre 
+     */
     private void initRdzTable(String filtre){
+//        Ici RDZList renvoi un model  de tableau
        jTable1.setModel(RDZList(filtre));
    }
     
+    /**
+     * Initialisation de la combobox spécialité
+     */
     private void initSpecList(){
+//        Instanciation du dao role
         DaoRole roleDao = new DaoRole();
+//        On récupère les role medecin
         List<Role> listRole = roleDao.selectAllTim();
         combModelSpec.addElement("");
         for (Object r : listRole) {
