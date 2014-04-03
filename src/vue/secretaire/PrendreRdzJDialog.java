@@ -37,6 +37,12 @@ public class PrendreRdzJDialog extends javax.swing.JDialog {
         this.refrechList("");
         this.initComboList();
     }
+    public PrendreRdzJDialog(java.awt.Dialog parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        this.refrechList("");
+        this.initComboList();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

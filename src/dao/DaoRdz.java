@@ -163,9 +163,20 @@ public class DaoRdz implements IDao<Rdz> {
         {
             Connection cnx = bdd.seConnecter();
             
-            String selectRole = "select ID_ROLE from role where INTITULE='"+valeur+"'";
-            String selectMdc = "select ID_USER from user where ID_ROLE_USER =("+selectRole+")";
-            String selectRdz = "select * from rdz where ID_MEDECIN_RDZ=("+selectMdc+")";
+            String selectRole = "";
+            String selectMdc = "";
+            String selectRdz = "";
+                    
+            if(champFiltr.equals("ID_ROLE_USER")){
+                selectRole = "select ID_ROLE from role where INTITULE='"+valeur+"'";
+                selectMdc = "select ID_USER from user where ID_ROLE_USER =("+selectRole+")";
+                selectRdz = "select * from rdz where ID_MEDECIN_RDZ=("+selectMdc+")";
+            }else{
+                String nomPrenom[] = valeur.split(" ");
+                selectMdc = "select ID_USER from user where NOM LIKE '"+nomPrenom[0]+"%' AND PRENOM LIKE '"+nomPrenom[1]+"%'";
+                selectRdz = "select * from rdz where ID_MEDECIN_RDZ=("+selectMdc+")";
+            }
+            
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(selectRdz);
             
