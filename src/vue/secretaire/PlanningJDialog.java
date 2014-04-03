@@ -148,7 +148,7 @@ public class PlanningJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-      // new PrendreRdzJDialog(this, true).setVisible(true);
+      new PrendreRdzJDialog(this, true).setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jComboSpecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboSpecActionPerformed

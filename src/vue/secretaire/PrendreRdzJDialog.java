@@ -37,6 +37,12 @@ public class PrendreRdzJDialog extends javax.swing.JDialog {
         this.initComboList();
         //this.setVisible(true);
     }
+    public PrendreRdzJDialog(javax.swing.JDialog parent, boolean modal) {
+        initComponents();
+        this.refrechList("");
+        this.initComboList();
+        //this.setVisible(true);
+    }
 
 
     /**

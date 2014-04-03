@@ -6,6 +6,13 @@
 
 package vue.secretaire;
 
+import contrat.IDao;
+import dao.DaoDossierPatient;
+import factory.FactoryDao;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 import metier.patient.DossierPatient;
 
 /**
@@ -19,6 +26,7 @@ public class ListDSPJDialog extends javax.swing.JDialog {
      */
     public ListDSPJDialog(javax.swing.JInternalFrame parent, boolean modal) {
         initComponents();
+        initRdzTable("");
     }
 
     /**
@@ -37,6 +45,7 @@ public class ListDSPJDialog extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -55,6 +64,14 @@ public class ListDSPJDialog extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         jTextField1.setText("Tapez le nom d'un patient");
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
 
         jButton1.setText("Ajouter un nouveau");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -72,13 +89,22 @@ public class ListDSPJDialog extends javax.swing.JDialog {
 
         jButton3.setText("Supprimer un dossier");
 
+        jButton4.setText("Refrech");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 402, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
@@ -94,7 +120,8 @@ public class ListDSPJDialog extends javax.swing.JDialog {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -137,8 +164,22 @@ public class ListDSPJDialog extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         DossierPatient dossierP = new DossierPatient();
-        new NouveauDossierPateintJDialog(this, true).setVisible(true);
+        jTable1.getSelectedRow();
+        System.out.println(jTable1.getValueAt(WIDTH, WIDTH));
+        new NouveauDossierPateintJDialog(this, true, dossierP).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        initRdzTable("");
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        initRdzTable(jTextField1.getText());
+    }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        initRdzTable(jTextField1.getText());
+    }//GEN-LAST:event_jTextField1KeyReleased
 
     /**
      * @param args the command line arguments
@@ -186,10 +227,81 @@ public class ListDSPJDialog extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    private final DefaultComboBoxModel combModelSpec = new DefaultComboBoxModel();
+    
+    /**
+     * Initialisation du model pour le tableau des rendez-vous
+     * filtre est un champs de la table avec lequel on va trier la séléction
+     * @param filtre
+     * @return 
+     */
+    public DefaultTableModel RDZList(String filtre)
+    {
+        
+//        Initialisation de la ligne entête du tableau
+        String[] columnNames = {"#", "Nom", "Prénom", "Numéro SS"};
+
+//        Instanciation du model pour le tableau
+        DefaultTableModel dtm = new DefaultTableModel(columnNames , 0);
+        
+//        Renseignement du nombre de colonnes
+        dtm.setColumnCount(4);
+        
+//        Instanciation du DAO RDZ, Medecin, Creneau, DossierPatient et Role
+        IDao rdzDao = FactoryDao.getDAO("Rdz");
+        IDao dspDao = FactoryDao.getDAO("DossierPatient");
+        
+//        Intanciation d'une arrayList pour stocker les rdv
+        List<DossierPatient> listDSP = new ArrayList();
+        
+//        Si un filtre n'existe pas on prends toutes la table sinon on séléction selon ce dernier
+//        Et on stocke le tout dans la liste
+        if(filtre.equals("")){
+            listDSP = dspDao.selectAllTim();
+        }else{
+//            La method selectAllbyFiltreTim renvoie une liste
+            listDSP = dspDao.selectAllbyFiltreTim("NOM PRENOM", filtre);
+        }
+        
+//        On parcour notre liste pour stocker item par item dans le model du tableau
+        int index = 1;
+        for (DossierPatient d : listDSP) 
+        {
+            DossierPatient dsp = (DossierPatient)d;
+//            Avec l'id du medecin dans la ligne rdv on récupère l'objet medecin
+//            ainsi de meme avec le dossierPatient, Creneau  et role
+            String nom = d.getNom();
+            String prenom = d.getPrenom();
+            String nss = d.getNss();
+            
+//            On ajoute une ligne dans le model de tableau avec les éléments qui viennent d'êrte récupéré
+            dtm.addRow(new Object[]
+            {
+                index,
+                nom,
+                prenom,
+                nss
+            });
+            index++;
+        }
+//        On renvoi le model  de tableau
+        return dtm;
+    }
+
+    /**
+     * On initialise le tableau des rdv avec le model deja defini
+     * @param filtre 
+     */
+    void initRdzTable(String filtre){
+//        Ici RDZList renvoi un model  de tableau
+       jTable1.setModel(RDZList(filtre));
+   }
 }

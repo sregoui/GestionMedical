@@ -22,7 +22,7 @@ public class bdd {
     private Connection cnx;
     private String username = "root";
     private String password = "";
-    private String url = "jdbc:mysql://localhost/gestion_medical";
+    private String url = "jdbc:mysql://localhost/gestionm";
 
     public Connection seConnecter() throws ClassNotFoundException {
         try {

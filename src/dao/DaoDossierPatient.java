@@ -281,8 +281,13 @@ public class DaoDossierPatient implements IDao<DossierPatient> {
         List listDSP = new ArrayList();
         
         try {
+            String sql = null;
             Connection cnx = bdd.seConnecter();
-            String sql = "select * from dossierpatient where "+champFiltr+" like '"+valeur+"%'";
+            if (champFiltr.equals("NOM PRENOM")) {
+                sql = "select * from dossierpatient where NOM like '"+valeur+"%' OR PRENOM like '"+valeur+"%'";
+            }else{
+                sql = "select * from dossierpatient where "+champFiltr+" like '"+valeur+"%'";
+            }
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(sql);
             

@@ -25,9 +25,26 @@ public class NouveauDossierPateintJDialog extends javax.swing.JDialog {
     }
     
         
-    public NouveauDossierPateintJDialog(java.awt.Frame parent, boolean modal, DossierPatient dossierP) {
+    public NouveauDossierPateintJDialog(java.awt.Dialog parent, boolean modal, DossierPatient dossierP) {
         super(parent, modal);
         initComponents();
+        
+//            private javax.swing.JTextField name;
+//    private javax.swing.JTextField nss;
+//    private javax.swing.JTextField prenom;
+//    private javax.swing.JComboBox sexe;
+//    private javax.swing.JTextField ville;
+//    private javax.swing.JTextField zip;
+//        private javax.swing.JTextField adress;
+//    private javax.swing.JTextField date_de_naissance;
+
+        name.setText(dossierP.getNom());
+        nss.setText(dossierP.getNss());
+        prenom.setText(dossierP.getPrenom());
+        ville.setText(dossierP.getVille());
+        zip.setText(dossierP.getZip_code());
+        adress.setText(dossierP.getAdresse());
+        date_de_naissance.setText(dossierP.getDate_de_naissance());
     }
 
     /**
