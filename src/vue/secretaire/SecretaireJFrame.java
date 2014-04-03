@@ -235,7 +235,7 @@ public class SecretaireJFrame extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // new NouveauDossierPateintJDialog(this, true).setVisible(true);
+        new NouveauDossierPateintJDialog(this, true).setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
