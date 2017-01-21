@@ -1,6 +1,6 @@
 GestionMedical
 ==============
-Le logiciel devrait mettre l'organisation et l'automatisation de la gestion d'un cabinet médical, afin d'augmenter la fiabilité, l'efficacité de l'effort humain et faciliter les tâches pénibles au sein du cabinet.
+Le logiciel doit permettre l'organisation et l'automatisation de la gestion d'un cabinet médical, afin d'augmenter la fiabilité, l'efficacité de l'effort humain et faciliter les tâches pénibles au sein du cabinet.
 Notre application comprendra les fonctionnalités suivantes :
 o	Gestion et Suivi du Dossier Médical.
 o	Gestion des Rendez-vous.
